@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./static/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-providers@latest/leaflet-providers.js"></script>
+   </head>
+
+<style>
+    /* remove body margins */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+</style>
+
+
+<!-- Create an element where the map will take place -->
+ <!-- Gray navbar containing a button to open the filter on the left, the title in the center and an icon on the right -->
+ <header class="fixed top-0 w-full z-[1000]">
+    <nav class="bg-gray-800 p-4 flex justify-between items-center rounded-lg m-4">
+        <button id="sidebarOpen" class="text-white" onclick="toggleFilterNavBar()">
+        <i class="bi bi-ui-radios text-2xl"></i>
+        </button>
+        <button id="sidebarClose" class="text-white hidden" onclick="toggleFilterNavBar()">
+        <i class="bi bi-x-lg text-2xl"></i>
+        </button>
+        <h1 class="text-white text-xl font-bold">LeadingAI</h1>
+        <button class="text-white">
+            <i class="bi bi-question-circle text-2xl"></i>
+        </button>
+    </nav>
+
+</header>
+
+<body class="bg-gray-200 h-full z-0">
+
+    
+   
+    
+  
+  <script>
+      // Scripts to control the state of the application
+  
+  
+      // State management
+      class State {
+          constructor() {
+              this.state = {};
+          }
+  
+          set(key, value) {
+              this.state[key] = value;
+          }
+  
+          get(key) {
+              return this.state[key];
+          }
+      }
+  
+      const filterNavBar = new State();
+      const openButton = document.getElementById('sidebarOpen');
+      const closeButton = document.getElementById('sidebarClose');
+      filterNavBar.set('open', false);
+  
+      function toggleFilterNavBar() {
+          console.log('Toggling filter nav bar');
+          if (filterNavBar.get('open')) {
+              filterNavBar.set('open', false);
+              // hide the open button and show the close button
+              openButton.classList.remove('hidden');
+              closeButton.classList.add('hidden');
+          } else {
+              filterNavBar.set('open', true);
+              // hide the open button and show the close button
+              openButton.classList.add('hidden');
+              closeButton.classList.remove('hidden');
+          }
+      }
+  </script>
+  
+
+
+    <div id="map" class="flex w-full h-full bg-red-800 z-0" style="height: 100vh;"></div>
+    <div id="gaussianDisplay" class="absolute bottom-0 width-full z-[1000] pb-4" style="height: 15vh; width: 100vw;"></div>
+</body>
+</html>
+
+<script>
+var map = L.map('map').setView([51.505, -0.09], 3);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 4,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
+
+// remove the weird zoom control
+map.removeControl(map.zoomControl);
+
+
+// canvas gaussian test
+function sampleData(){
+    // sample a random mean and standard deviation
+    const mean = Math.random() * 100;
+    const std = Math.random() * 10;
+
+    // sample 200 random values out of a normal distribution
+    const data = d3.range(200).map(d3.randomNormal(mean, std));
+    
+    // normalize the data so that values lie in between 0 and 100
+    const min = d3.min(data);
+    const max = d3.max(data);
+    const scale = d3.scaleLinear().domain([min, max]).range([0, 100]);
+    return data.map(d => scale(d));
+}
+
+let data = sampleData();
+
+function showGraph(data) {
+
+    // Use D3.js to perform KDE on the data and show a smooth curve
+
+
+
+    // KDE
+    function kde(kernel, thresholds, data) {
+        return thresholds.map(t => [t, d3.mean(data, d => kernel(t - d))]);
+    }
+    function epanechnikov(bandwidth) {
+        return x => Math.abs(x /= bandwidth) <= 1 ? 0.75 * (1 - x * x) / bandwidth : 0;
+    }
+
+
+
+    // Replace the canvas with the svg
+    const svg = d3.select('#gaussianDisplay').append('svg').attr('width', '100%').attr('height', '100%');
+    
+    // perform KDE
+    const thresholds = d3.range(0, 100, 1);
+    const kernel = epanechnikov(10);
+    const kdeData = kde(kernel, thresholds, data);
+    let dataMax = d3.max(kdeData, d => d[1]);
+
+
+    // create scales for the x and y axis based on the data
+    const x = d3.scaleLinear().domain([0, 95]).range([0, 100]);
+    const y = d3.scaleLinear().domain([0, dataMax * 1.2]).range([100, 0]);
+
+
+
+    // get the width and height of the svg in pixels
+    const width = svg.style('width').slice(0, -2);
+    const height = svg.style('height').slice(0, -2) - 20;
+
+    // create a line generator that will draw the line scaled to the svg with padding
+    const line = d3.line().x(d => x(d[0]) * width / 100).y(d => y(d[1]) * (height) / 100).curve(d3.curveBasis);
+    
+
+
+
+
+    // draw the line
+    svg.append('path').datum(kdeData).attr('d', line).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', 5);
+
+
+
+
+
+
+}
+
+showGraph(data);
+   
+</script>
