@@ -1,9 +1,12 @@
-# Project of Data Visualization (COM-480)
+# LeadingAI - Visualising global AI state actors
+### Data Visualization (COM-480) - 2024 Project
 
 | Student's name | SCIPER |
+|---|---|
 | Quentin Esteban | 288211 |
 | Malo Ranzetti | 296956 |
 | Anne Silvestre de Sacy| 360399|
+
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
@@ -20,7 +23,6 @@ The dataset we use is the AI Global Index by Tortoise Media. In addition to the 
 A big advantage of this dataset is that it is very clean. It almost can be used as is It has a usability score of 10 out of 10 on Kaggle. While the completeness and credibility ensure us that the data are relevant, usability allows us to load and interpret them easily, without much preprocessing. Another very convenient feature is that the variables are already normalized on a 0 to 100 scale.
 
 We would like to point out that we don't necessarily limit ourselves to this dataset. These are the fundamentals of our work but according to the development of the project we could add other datasets, especially approaching geopolitics.
-
 
 ### Problematic
 
