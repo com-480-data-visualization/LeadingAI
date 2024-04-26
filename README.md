@@ -60,7 +60,31 @@ This dataset has mainly been used with machine learning prediction algorithms. O
 
 ## Milestone 2 (26th April, 5pm)
 
-**10% of the final grade**
+### [FULL REPORT](milestone-2/Data_Visualization_Milestone_2.pdf)
+
+[<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/milestone2/milestone-2/fig1.png?raw=true'>](http://185.224.139.115:8000/)
+
+## Link to hosted basic skeleton: [http://185.224.139.115:8000/](http://185.224.139.115:8000/)
+
+## General overview
+
+In the previous milestone, we proposed a project which helps visualize the ranking per country regarding the development of AI related technologies, using a multitude of different indicators. We decided that we would build our project around a world map and enhance the user experience through interactions and by superimposing additional graphs and data around the map. As such, we directly implemented a basic skeleton of the web page, as shown in the figure above. 
+We center our project around the interactive chloropleth map, which can display the main index as well as the indicators. Users can click on countries to visualize more detailed information as well as a graph showing its position in the global ranking and the distribution of index scores in the dataset. We plan on adding a pop-up toolbar on the left side of the screen giving the user the possibility to explore different indicators or perform filtering operations.
+
+
+## Implementation steps
+
+- Backend server & frameworks
+- World map
+- Data display
+- Filter menu
+
+
+## Resources
+To make our website we plan to use concepts from most of the COM-480 course. The main lecture used is the one about map visualization: we proceed as in the course, using leaflet.js and converting a shapefile to GeoJSON, we are able to build the desired chloropleth by superimposing content rendered from D3.js.
+
+Most of the other graphs will be designed using courses on D3.js: we might need the lecture about graphs but also data and tabular data. It will help us decide which one suits the data best and what we want to convey. To go further and potentially link the map with the graphs, as well as interact with them, the lecture about interaction will serve us well. Finally, a key factor in effectively sharing information (and engaging our readers) is storytelling and the corresponding lecture. 
+
 
 
 ## Milestone 3 (31st May, 5pm)
