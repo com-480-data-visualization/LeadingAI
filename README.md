@@ -12,7 +12,15 @@
 ### [FULL REPORT](milestone-1/Data_Visualization_Milestone_1.pdf)
 
 ### Dataset
-TODO
+
+[Link to the AI Index dataset](https://www.kaggle.com/datasets/katerynameleshenko/ai-index)
+
+The dataset we use is the AI Global Index by Tortoise Media. In addition to the overall index, it provides more detailed information about three main features of the 62 countries it analyzes: AI implementation, innovation, and investment. To do so it combines 143 indicators into seven indexes in a very comprehensive way. In our analysis, we may want to weigh these indicators differently to put more emphasis on certain aspects than others (it should require some additional work though). The dataset only including 62 countries may seem not enough but all the main protagonists are there and it could help us not to overwhelm our public.
+
+A big advantage of this dataset is that it is very clean. It almost can be used as is It has a usability score of 10 out of 10 on Kaggle. While the completeness and credibility ensure us that the data are relevant, usability allows us to load and interpret them easily, without much preprocessing. Another very convenient feature is that the variables are already normalized on a 0 to 100 scale.
+
+We would like to point out that we don't necessarily limit ourselves to this dataset. These are the fundamentals of our work but according to the development of the project we could add other datasets, especially approaching geopolitics.
+
 
 ### Problematic
 
