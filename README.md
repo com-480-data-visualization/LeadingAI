@@ -52,7 +52,7 @@ This dataset has mainly been used with machine learning prediction algorithms. O
 
 ### [FULL REPORT](milestone-2/Data_Visualization_Milestone_2.pdf)
 
-<img src="path/to/image.png">](http://185.224.139.115:8000/)
+<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/milestone2/milestone-2/fig1.png?raw=true'>](http://185.224.139.115:8000/)
 
 ## Link to hosted basic skeleton: [http://185.224.139.115:8000/](http://185.224.139.115:8000/)
 
