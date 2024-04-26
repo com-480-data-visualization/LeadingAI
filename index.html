@@ -18,6 +18,10 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
     <script src="https://unpkg.com/leaflet-providers@latest/leaflet-providers.js"></script>
+
+    <script type="module">
+        import countryFlagIcons from 'https://cdn.jsdelivr.net/npm/country-flag-icons@1.5.11/+esm'
+    </script>
    </head>
 
 <style>
@@ -96,19 +100,235 @@
 
 
     <div id="map" class="flex w-full h-full bg-red-800 z-0" style="height: 100vh;"></div>
-    <div id="gaussianDisplay" class="absolute bottom-0 width-full z-[1000] pb-4" style="height: 15vh; width: 100vw;"></div>
+    <div id="gaussianDisplay" class="rounded-md pointer-events-none absolute bottom-0 width-full z-[1000] p-4" style="height: 20vh; width: 100vw; background-color: rgba(30, 30, 30, 0.5);">
+    </div>
+
+    <div id="informationBubble" class="rounded-lg absolute top-40 right-5 p-4 bg-white shadow-md z-[1000]">
+        <h1 id="infoSelectedCountry" class="text-lg font-bold">Please select a country</h1>
+        <p class="font-bold text-sm">Ranking: <span id="rankSelectedCountry">N/A</span></p>
+        <p id="scoreSelectedCountry" class="text-sm">Score will appear here</p>
+        
+        <i class="text-xs">Click on a country to see more information</i>
+    </div>
 </body>
 </html>
 
 <script>
-var map = L.map('map').setView([51.505, -0.09], 3);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 4,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(map);
+let map = L.map('map').setView([51.505, -0.09], 3);
+
+// restrict the map to the bounds of the world
+map.setMaxBounds([[-90, -180], [90, 180]]);
+map.on('drag', function() {
+    map.panInsideBounds([[90, 180], [-90, -180]], { animate: false });
+});
+
+// set the min and max zoom levels
+map.options.maxZoom = 5;
+map.options.minZoom = 2;
+
+// make sure that resizing the window doesn't break the map
+map.on('resize', function() {
+    map.panInsideBounds([[90, 180], [-90, -180]], { animate: false });
+    map.invalidateSize();
+});
 
 // remove the weird zoom control
 map.removeControl(map.zoomControl);
+
+// set the map background to dark gray
+document.getElementById('map').style.backgroundColor = '#333';
+
+let rawData;
+let selectedScoreFunction;
+let geojsonRef;
+let currentGraphColors = ['#6a74a8', '#73b8af', '#c3f38b'];
+
+//Entry point: download the data and start the application
+d3.json('/static/data-classic.json').then(function(data) {
+    rawData = data;
+    // use list comprehension to get the data
+    selectedScoreFunction = d => d.TotalScore;
+
+    // Proceed to the next step
+    InitStep2();
+});
+
+/*
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 4,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+});//.addTo(map);
+*/
+
+const InitStep2 = () => {
+
+// Load the country outlines
+
+    d3.json('/static/countries.geo.json').then(function(data) {
+
+        const color = colorGradientFactory(0, 100, currentGraphColors);
+        
+        function style(feature) {
+            // check if the feature is in the data
+            if (rawData[feature.id]) {
+                // return a gradient color based on total score (max 100)
+                // color scheme: #00429d,#73a2c6,#ffffe0
+                console.log(rawData[feature.id].TotalScore);
+
+                const score = rawData[feature.id].TotalScore;
+                console.log(color(score));
+                return {
+                    fillColor: color(score),
+                    weight: 1,
+                    opacity: 0.4,
+                    color: '#333',
+                    fillOpacity: 1
+                };
+            }
+
+            return {
+                fillColor: "#E3E3E3",
+                weight: 1,
+                opacity: 0.4,
+
+                // dark gray
+                color: '#333',
+                fillOpacity: 0.3
+            };
+        }
+
+        geojsonRef = L.geoJson(data, {
+            onEachFeature: onEachFeature,
+            style : style
+        }).addTo(map);
+
+        function onEachFeature(feature, layer){
+            layer.on({
+                click : onCountryClick,
+                mouseover : onCountryHighLight,
+                mouseout : onCountryMouseOut
+            });
+        }
+        
+    }); // end of 'then'
+
+
+
+}
+
+
+/*
+Behaviours
+*/
+
+
+
+
+
+
+
+
+function onCountryClick(e){
+    console.log(e.target.feature.id);
+
+
+    // if the country is not in the data, remove graph and return
+    if (!rawData[e.target.feature.id]) {
+        removeGraph();
+        return;
+    }
+
+    // get the data for the country
+    let countryData = rawData[e.target.feature.id];
+    console.log(countryData);
+
+    // show the graph
+    showGraph(countryData, colorGradientFactory(0, 100, currentGraphColors));
+
+    
+}
+
+function onCountryHighLight(e){
+    var layer = e.target;
+    layer.setStyle({
+        weight: 4,
+        // dark gray
+        color: '#333',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    
+
+    
+
+    if (!rawData[e.target.feature.id]) {
+        // show the information bubble
+        document.getElementById('infoSelectedCountry').innerText = e.target.feature.properties.name;
+        document.getElementById('scoreSelectedCountry').innerText = `No data`;
+        document.getElementById('rankSelectedCountry').innerText = `N/A`;
+        return;
+    } else {
+        var countryData = rawData[e.target.feature.id];
+        // show the information bubble
+        document.getElementById('infoSelectedCountry').innerText = countryData.Country;
+        document.getElementById('scoreSelectedCountry').innerText = `${selectedScoreFunction(countryData)}`;
+
+        // Calculate the ranking of the country
+        let rank = 1;
+        for (let key in rawData) {
+            if (rawData[key].TotalScore > rawData[e.target.feature.id].TotalScore) {
+                rank++;
+            }
+        }
+        document.getElementById('rankSelectedCountry').innerText = `${rank}`;
+    }
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+}
+
+function onCountryMouseOut(e){
+    geojsonRef.resetStyle(e.target);
+}
+
+
+
+
+
+/*
+HELPER FUNCTIONS
+*/
+
+
+function colorGradientFactory(min, max, colorsList) {
+    // interpolate between colors uniformly 
+    const scale = d3.scaleLinear().domain([0, 100]).range([0, colorsList.length - 1]);
+    
+    // Red channel values
+    const red = d3.scaleLinear().domain(d3.range(colorsList.length)).range(colorsList.map(d => parseInt(d.slice(1, 3), 16)));
+    // Green channel values
+    const green = d3.scaleLinear().domain(d3.range(colorsList.length)).range(colorsList.map(d => parseInt(d.slice(3, 5), 16)));
+    // Blue channel values
+    const blue = d3.scaleLinear().domain(d3.range(colorsList.length)).range(colorsList.map(d => parseInt(d.slice(5, 7), 16)));
+
+    return function(value) {
+        const index = scale(value);
+        const lower = Math.floor(index);
+        const upper = Math.ceil(index);
+        const fraction = index - lower;
+        const r = red(lower) * (1 - fraction) + red(upper) * fraction;
+        const g = green(lower) * (1 - fraction) + green(upper) * fraction;
+        const b = blue(lower) * (1 - fraction) + blue(upper) * fraction;
+        return `rgb(${r}, ${g}, ${b})`;
+    };
+}
+
+
+
+
+
 
 
 // canvas gaussian test
@@ -129,12 +349,16 @@ function sampleData(){
 
 let data = sampleData();
 
-function showGraph(data) {
+function removeGraph() {
+    d3.select('#gaussianDisplay').selectAll('svg').remove();
+}
 
+function showGraph(focusedFeature, gradientFunction) {
+
+    let data = Object.keys(rawData).map(d => selectedScoreFunction(rawData[d]));
+
+    console.log("Showing graph for feature ", focusedFeature)
     // Use D3.js to perform KDE on the data and show a smooth curve
-
-
-
     // KDE
     function kde(kernel, thresholds, data) {
         return thresholds.map(t => [t, d3.mean(data, d => kernel(t - d))]);
@@ -143,8 +367,7 @@ function showGraph(data) {
         return x => Math.abs(x /= bandwidth) <= 1 ? 0.75 * (1 - x * x) / bandwidth : 0;
     }
 
-
-
+    removeGraph();
     // Replace the canvas with the svg
     const svg = d3.select('#gaussianDisplay').append('svg').attr('width', '100%').attr('height', '100%');
     
@@ -154,34 +377,72 @@ function showGraph(data) {
     const kdeData = kde(kernel, thresholds, data);
     let dataMax = d3.max(kdeData, d => d[1]);
 
-
-    // create scales for the x and y axis based on the data
-    const x = d3.scaleLinear().domain([0, 95]).range([0, 100]);
-    const y = d3.scaleLinear().domain([0, dataMax * 1.2]).range([100, 0]);
-
-
+    
 
     // get the width and height of the svg in pixels
     const width = svg.style('width').slice(0, -2);
-    const height = svg.style('height').slice(0, -2) - 20;
+    const height = svg.style('height').slice(0, -2);
+
+    // create scales for the x and y axis based on the data
+    const x = d3.scaleLinear().domain([0, 100]).range([20, width-20]);
+    const y = d3.scaleLinear().domain([0, dataMax]).range([height - 20, 20]);
 
     // create a line generator that will draw the line scaled to the svg with padding
-    const line = d3.line().x(d => x(d[0]) * width / 100).y(d => y(d[1]) * (height) / 100).curve(d3.curveBasis);
+    const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveBasis);
+
+    const makePrediction = (x) => {
+        // map an arbitrary x value to the y value
+
+        // clamp the x value to the domain of the data
+        x = Math.max(0, Math.min(95, x));
+
+        // find the closest data point to the x value
+        const closest = kdeData.reduce((acc, d) => {
+            if (Math.abs(d[0] - x) < Math.abs(acc[0] - x)) {
+                return d;
+            }
+            return acc;
+        }, kdeData[0]);
+
+        return y(closest[1]);
+    };
     
-
-
-
-
     // draw the line
-    svg.append('path').datum(kdeData).attr('d', line).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', 5);
+    svg.append('path').datum(kdeData).attr('d', line).attr('fill', 'none').attr('stroke', '#bbb').attr('stroke-width', 0)
+    // animate the line
+    .transition().duration(300).attr('stroke-width', 3);
 
 
+    // draw the data points, scaled to the size of the svg
+
+    svg.append('g').datum(data).selectAll('circle').data(d => d).enter().append('circle').attr('r', 5).attr('fill', d => gradientFunction(d))
+    // initial position is set to 0,0
+    .attr('cx', 20).attr('cy', 20)
+    // animate the position of the data points
+    .transition().duration(500).delay((d, i) => i * 5).attr('cx', d => Math.max(20, Math.min(width - 20, x(d))))
+    .transition().duration(200).delay((d, i) => i * 20).attr('cy', d => 
+    {
+        // project the data using the line function
+        return makePrediction(d);
+    }
+    )
+    ;
+
+    // draw the point of the focused country larger and give it a glow effect
+    svg.append('g').datum([focusedFeature.TotalScore]).selectAll('circle').data(d => d).enter().append('circle').attr('cx', d => Math.max(20, Math.min(width - 20, x(d)))).attr('cy', d => 
+    {
+        // project the data using the line function
+        console.log(d);
+        return makePrediction(d);
+    }
+    ).attr('r', 10).attr('fill', d => gradientFunction(d)).attr('stroke', '#fff').attr('stroke-width', 2).attr('style', 'box-shadow: 0px 0px 233px 56px rgba(70,46,255,0.75);')
+    //animation
+    .transition().duration(300).attr('r', 20).attr('stroke-width', 5).transition().duration(1000).attr('r', 10).attr('stroke-width', 2);
 
 
 
 
 }
 
-showGraph(data);
    
 </script>
