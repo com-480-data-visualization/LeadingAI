@@ -278,7 +278,7 @@
     </div>
 
 
-    <div id="scene-2" class="full-screen grid grid-cols-1 justify-items-center absolute">
+    <div id="scene-2" class="full-screen grid grid-cols-1 justify-items-center">
         <div id="rankingTitle" class="text-center text-8xl anton-regular w-full pt-16" style="color: #e87c6b; width: 100vw;">
             Global Rankings
         </div>
@@ -292,7 +292,7 @@
 
     </div>
 
-    <div id="scene-3" class="full-screen absolute">
+    <div id="scene-3" class="full-screen">
         <div class="text-center text-6xl ibm-plex-sans-semibold w-full pt-16" style="color: #cdcdcd; width: 100vw;">
             Interactive Map
         </div>
@@ -364,28 +364,51 @@
 
     // set scene1 to be the same height  as introText + headlines
     let scene1Duration = introTextHeight + headlinesHeight - 0.5 * wHeight;
-    $("#scene-1").css("height", scene1Duration + 2*wHeight);
+    $("#scene-1").css("height", scene1Duration);
 
+
+    // add a callback to scene 2 that changes the background color of the canvas depending on the scroll position
+    let canvas = document.getElementById("rankingCanvas");
+    let ctx = canvas.getContext("2d");
+    let canvasHeight = canvas.height;
+    let canvasWidth = canvas.width;
+    let colors = ["#e87c6b", "#ffcc75", "#75f075", "#59eac8", "#79ccfc", "#e6a0ff", "#cdcdcd"];
+    let colorIndex = 0;
+    let color = colors[colorIndex];
+    let colorChange = wHeight / 7;
 
     // add scene 2
     new ScrollMagic.Scene({
         triggerElement: "#scene-2",
-        duration:  wHeight / 1.75,
+        duration:  wHeight * 2 ,
         triggerHook: 0,
         reverse: true
+    })
+    .on("progress", function (e) {
+        let progress = e.progress;
+        let newColorIndex = Math.floor(progress * 7);
+        if (newColorIndex != colorIndex) {
+            colorIndex = newColorIndex;
+            color = colors[colorIndex];
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        }
     })
     .setPin("#scene-2")
     .addTo(controller);
 
-    // set the top of the ranking canvas to be just after the end of headlines
-    let scene2Top = headlinesTop + headlinesHeight;
-    $("#scene-2").css("top", scene2Top);
+    
+
 
 
     // Set the height of the ranking canvas to be wheight - height of rankingTitle - 50px
     let rankingTitleHeight = $("#rankingTitle").height();
     let rankingCanvasHeight = wHeight - rankingTitleHeight - 100;
     $("#rankingCanvas").css("height", rankingCanvasHeight);
+
+    // set the top value of the interactive map to be after the ranking section
+    let rankingTop = $("#scene-2").offset().top + $("#scene-2").height();
+    //$("#scene-3").css("top", rankingTop);
 
 
 
