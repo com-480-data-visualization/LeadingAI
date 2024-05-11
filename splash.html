@@ -1,0 +1,410 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./static/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js" integrity="sha512-jq8sZI0I9Og0nnZ+CfJRnUzNSDKxr/5Bvha5bn7AHzTnRyxUfpUArMzfH++mwE/hb2efOo1gCAgI+1RMzf8F7g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    </script>
+</head>
+
+<style>
+    .full-screen {
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .x4-screen {
+        height: 600vh;
+        width: 100vw;
+    }
+
+    .gradient-1 {
+        background-size: 100% 100%;
+        background-position: 0px 0px,0px 0px,0px 0px,0px 0px;
+        background-image: radial-gradient(75% 75% at 50% 50%, #93A7E30F 0%, #0C003BA8 100%),radial-gradient(75% 75% at 75% 75%, #FF00003B 0%, #073AFF03 100%),radial-gradient(65% 65% at 25% 50%, #7E00FF42 0%, #19000040 73%),linear-gradient(152deg, #000000FF 1%, #5B00E2FF 100%);
+    }
+
+    .gradient-2 {
+        background-size: 100% 100%;
+        background-position: 0px 0px,0px 0px;
+        background-image: radial-gradient(75% 75% at 75% 25%, #000535A6 0%, #073AFF00 100%),linear-gradient(0deg, #F0F0E0FF 3%, #151515FF 70%);
+    }
+
+    .gradient-3 {
+        background-size: 100% 100%;
+        background-position: 50% -1px,50% -1px,50% -1px,0px 0px,0px 0px;
+        background-image: conic-gradient(from 288deg at 25% 50%, #6E6E6E0A 0%, #00FFFF05 50%, #8D8D8D0F 100%),conic-gradient(from 190deg at 25% 50%, #6E6E6E0A 0%, #00FFFF05 50%, #9730300F 100%),conic-gradient(from 190deg at 25% 50%, #6E6E6E0A 0%, #00FFFF05 50%, #4530970F 100%),radial-gradient(75% 75% at 77% 50%, #18182799 1%, #002B9E0A 100%),repeating-linear-gradient(158deg, #191919FF 0%, #1C1C1CFF 100%);
+    }
+
+
+    .manrope-title {
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    }
+
+    .ibm-plex-sans-regular {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    }
+
+    .ibm-plex-sans-semibold {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    }
+
+    .anton-regular {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    }
+
+
+    .indicator1 {
+        background-color: #e87c6b;
+        border-color: #83443a;
+    
+    }
+
+    .indicator2 {
+        background-color: #ffcc75;
+        border-color: #997943;
+    
+    }
+
+    .indicator3 {
+        background-color: #75f075;
+        border-color: #4c9f4c;
+    
+    }
+
+    .indicator4 {
+        background-color: #59eac8;
+        border-color: #4da08d;
+    
+    }
+
+    .indicator5 {
+        background-color: #79ccfc;
+        border-color: #518daf;
+    
+    }
+
+    .indicator6 {
+        background-color: #e6a0ff;
+        border-color: #7e548d;
+    
+    }
+
+    .indicator7 {
+        background-color: hsl(345, 100%, 77%);
+        border-color: hsl(345, 32%, 53%);
+    
+    }
+
+    @-webkit-keyframes glow {
+        to {
+
+            -webkit-text-shadow: 0 0 10px #e5d77ea4;
+            -moz-text-shadow: 0 0 10px #e5d77ea4;
+            text-shadow: 0 0 10px #e5d77ea4;
+        }
+    }
+
+    .glower {
+        -webkit-text-shadow: 0 0 10px #c3c0d0;
+        -moz-text-shadow: 0 0 10px #c3c0d0;
+        text-shadow: 0 0 10px #c3c0d0;
+        animation: glow 1.0s infinite alternate;  
+        -webkit-animation: glow 1.0s infinite alternate;  
+        -webkit-transition: border 1.0s linear, box-shadow 1.0s linear;
+        -moz-transition: border 1.0s linear, box-shadow 1.0s linear;
+                transition: border 1.0s linear, box-shadow 1.0s linear;
+    }
+
+
+</style>
+<body>
+
+    <div id="pinnedContent0" class="grid grid-cols-1 place-items-center absolute" style="z-index: 1000; width: 100vw">
+        <div>
+            <div class="flex justify-center" data-aos="zoom-in">
+                <h1 class="text-white text-4xl md:text-8xl manrope-title p-3 text-center"> Leading AI</h1>
+            </div>
+            <div>
+                <h2 class="text-white p-3 ms-2" data-aos="zoom-in">A data visualization project</h2>
+            </div>
+
+        </div>
+
+        <div class="flex w-full justify-center mt-8 manrope-title">
+
+            <div class="flexjustify-center p-4 rounded-lg" style="background-color: rgba(66, 66, 66, 0.614);">
+                <div class="flex text-center flex-col" style="opacity: 1;">
+
+                    <h1 class="text-white">
+                        Written by M.Ranzetti, ..., ...
+                        
+
+                    </h1>
+
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <div id="scene-0" class="gradient-1 full-screen z-10"></div>
+    <canvas id="particles" class="full-screen absolute top-0 z-"></canvas>
+    <div class="full-screen absolute p-6 grid grid-cols-1 z-4 gap-6 lg:p-10" style="top:100vh;">
+
+
+    
+
+
+    
+
+        
+        
+    </div>
+    <div id="scene-1" class="x4-screen gradient-2 z-3">
+        
+    </div>
+
+    <div id="introText" class="text-white absolute w-full px-5 py-8 md:px-48 md:text-4xl ibm-plex-sans-semibold" style="top:140vh; width: 100vw;">
+
+        <div id="firstIntroText" class="text-center text-2xl">This project is based on <span class="cursor-pointer underline" onclick="window.open('https://www.kaggle.com/datasets/katerynameleshenko/ai-index')">Kaggle data</span> by Kateryna Meleshenko, originally provided by
+            <span class="cursor-pointer underline" onclick="window.open('https://www.tortoisemedia.com/intelligence/global-ai/')">Tortoise Media</span> </div>
+        
+        <h2 class="text-justify py-8">
+            In past years, we have witnessed an unprecedented boom in the A.I sector. Some may think it is a buzzword, others see it as the way forward for society.
+            Regardless, the impact of A.I on our society is undeniable. This project aims to visualize the leading nations in the A.I sector compare to each other.
+            Although strong leaders emerge, we can turn our eyes to the future and imagine who the next important players will be.
+        </h2>
+        
+        <h2 class="my-8">
+            To calculate a score for each nation, 7 different indicators are used. These indicators are:
+            <ul class="list-inside mt-8 text-2xl">
+                <li class="my-8 leading-loose" data-aos="zoom-out-left"><span class="rounded-lg p-1 border-4 indicator1">Talent</span> availability of skilled practitioners for the provision of artificial intelligence solutions</li>
+                <li class="my-8 leading-loose" data-aos="zoom-out-left"><span class="rounded-lg p-1 border-4 indicator2">Infrastructure</span> reliability and scale of access infrastructure, from electricity and internet, to super computing capabilities</li>
+                <li class="my-8 leading-loose" data-aos="zoom-out-left"><span class="rounded-lg p-1 border-4 indicator3">Operating Environment</span> regulatory context, and public opinion surrounding artificial intelligence</li>
+                <li class="my-8 leading-loose" data-aos="zoom-out-left"><span class="rounded-lg p-1 border-4 indicator4">Research</span> extent of specialist research and researchers; investigating the amount of publications and citations in credible academic journals</li>
+                <li class="my-8 leading-loose" data-aos="zoom-out-left"><span class="rounded-lg p-1 border-4 indicator5">Development</span> capacities for development of fundamental platforms and algorithms upon which innovative artificial intelligence projects rely</li>
+                <li class="my-8 leading-loose" data-aos="zoom-out-left"><span class="rounded-lg p-1 border-4 indicator6">Government Strategy</span> depth of commitment from national government to artificial intelligence; investigating spending commitments and national strategies</li>
+                <li class="my-8 leading-loose" data-aos="zoom-out-left"><span class="rounded-lg p-1 border-4 indicator7">Commercial</span> level of startup activity, investment and business initiatives based on artificial intelligence</li>
+            </ul>
+        </h2>
+
+        <div id="butWhy" class="flex w-full justify-center flex-col my-32">
+
+            <h1 class="text-8xl manrope-title glower text-center">But why AI?</h1>
+
+        </div>
+
+        
+    </div>
+
+    <div id="headlines" class="absolute grid grid-cols-1 lg:grid-cols-3 w-full gap-6 py-10 px-4 z-4" style="top: 250vh;">
+
+        
+
+        <div id="headline1" class="flex w-full justify-center mt-4" data-aos="zoom-out-right">
+            <img src="/static/headlines/1.png" class="w-25 rounded-lg cursor-pointer" alt="" onclick="window.open('https://www.forbes.com/sites/siladityaray/2024/05/08/biden-will-announce-microsofts-33-billion-ai-datacenter-in-wisconsin-today-on-same-site-as-trumps-failed-foxconn-factory/', '_blank');">
+        </div>
+        <div class="text-2xl text-white text-center">The potential of A.I is vast. It can be used to solve some of the most pressing issues of our time, from climate change to healthcare. </div>
+        <div></div>
+        <div></div>
+        <div class="text-2xl text-white text-center">However, it also poses a potential threat to our society. </div>
+        
+        <div id="headline2" class="flex w-full justify-center mt-4" data-aos="zoom-out-left">
+            <img src="/static/headlines/2.png" class="w-25 rounded-lg cursor-pointer" alt="" onclick="window.open('https://www.aljazeera.com/news/2024/3/1/could-ai-exacerbate-inequalities-in-our-world-today', '_blank');">
+        </div>
+
+        <div id="headline3" class="flex w-full justify-center mt-4" data-aos="zoom-out-right">
+            <img src="/static/headlines/3.png" class="w-25 rounded-lg cursor-pointer" alt="" onclick="window.open('https://www.aljazeera.com/news/2024/3/1/could-ai-exacerbate-inequalities-in-our-world-today', '_blank');">
+        </div>
+
+        <div class="text-2xl text-white text-center"> It is clear that nations that are able to harness the power of A.I will have a significant strategic advantage in the future.</div>
+        <div></div>
+        <div></div>
+        <div class="text-2xl text-white text-center">Should we be worried about geographical inequalities in the A.I. sector?</div>
+
+        <div id="headline4" class="flex w-full justify-center mt-4" data-aos="zoom-out-left">
+            <img src="/static/headlines/4.png" class="w-25 rounded-lg cursor-pointer" alt="" onclick="window.open('https://www.aljazeera.com/news/2024/3/1/could-ai-exacerbate-inequalities-in-our-world-today', '_blank');">
+        </div>
+
+
+        <div id="headline5" class="flex w-full justify-center mt-4" data-aos="zoom-out-right">
+            <img src="/static/headlines/5.png" class="w-25 rounded-lg cursor-pointer" alt="" onclick="window.open('https://www.aljazeera.com/news/2024/3/1/could-ai-exacerbate-inequalities-in-our-world-today', '_blank');">
+        </div>
+
+        <div class="text-2xl text-white text-center">How can we ensure that A.I is used for the betterment of society?
+
+            <h1 class=" mt-32 text-4xl manrope-title text-black text-center">Let's explore some data!</h1>
+        </div>
+
+
+
+    
+    </div>
+
+
+    <div id="scene-2" class="full-screen grid grid-cols-1 justify-items-center absolute">
+        <div id="rankingTitle" class="text-center text-8xl anton-regular w-full pt-16" style="color: #e87c6b; width: 100vw;">
+            Global Rankings
+        </div>
+
+        <canvas id="rankingCanvas" style="
+            width: 80vw;
+            height: 80vh;
+            background-color: #008b0c;
+        
+        "></canvas>
+
+    </div>
+
+    <div id="scene-3" class="full-screen absolute">
+        <div class="text-center text-6xl ibm-plex-sans-semibold w-full pt-16" style="color: #cdcdcd; width: 100vw;">
+            Interactive Map
+        </div>
+    </div>
+        
+
+<script>
+
+    // init ScrollMagic Controller
+    let controller = new ScrollMagic.Controller();
+    let wHeight = $(window).height();
+    console.log(wHeight);
+    AOS.init();
+
+    // Create first scene
+    new ScrollMagic.Scene({
+        triggerElement: "#scene-0",
+        duration:  wHeight ,
+        triggerHook: 0,
+        reverse: true
+    })
+    .setPin("#particles")
+    .addTo(controller);
+
+    // get the y coordinate difference between the top of pinnedContent0 and IntroText, then add it to the height of pinnedContent0
+    let pinnedContent0Offset = $("#pinnedContent0").offset().top + ($("#pinnedContent0").height() * 1.3);
+    let introTextOffset = $("#introText").offset().top;
+    let durationTitle = introTextOffset - pinnedContent0Offset;
+
+    // Create first scene
+    new ScrollMagic.Scene({
+        triggerElement: "#pinnedContent0",
+        duration:  durationTitle,
+        triggerHook: 'onCenter',
+        reverse: true
+    })
+    .setPin("#pinnedContent0")
+    .addTo(controller);
+
+    // Pin each headline
+    new ScrollMagic.Scene({
+        triggerElement: "#scene-1",
+        duration:  wHeight,
+        triggerHook: 0,
+        reverse: true
+    })
+    .setPin("#scene-1")
+    .addTo(controller);
+
+    // pin butWhy for the whole height of headlines
+    let headlinesHeight = $("#headlines").height();
+
+
+
+    new ScrollMagic.Scene({
+        triggerElement: "#butWhy",
+        duration:  headlinesHeight / 2,
+        triggerHook: 'onCenter',
+        reverse: true
+    })
+    .setPin("#butWhy")
+    .addTo(controller);
+
+    // Set the top value of headlines to be after the introText section
+    let introTextHeight = $("#introText").height();
+    let introTextTop = $("#introText").offset().top;
+    let headlinesTop = introTextTop + introTextHeight;
+    $("#headlines").css("top", headlinesTop);
+
+    // set scene1 to be the same height  as introText + headlines
+    let scene1Duration = introTextHeight + headlinesHeight - 0.5 * wHeight;
+    $("#scene-1").css("height", scene1Duration + 2*wHeight);
+
+
+    // add scene 2
+    new ScrollMagic.Scene({
+        triggerElement: "#scene-2",
+        duration:  wHeight / 1.75,
+        triggerHook: 0,
+        reverse: true
+    })
+    .setPin("#scene-2")
+    .addTo(controller);
+
+    // set the top of the ranking canvas to be just after the end of headlines
+    let scene2Top = headlinesTop + headlinesHeight;
+    $("#scene-2").css("top", scene2Top);
+
+
+    // Set the height of the ranking canvas to be wheight - height of rankingTitle - 50px
+    let rankingTitleHeight = $("#rankingTitle").height();
+    let rankingCanvasHeight = wHeight - rankingTitleHeight - 100;
+    $("#rankingCanvas").css("height", rankingCanvasHeight);
+
+
+
+</script>
+
+<script>
+
+window.onload = function() {
+    Particles.init
+    ({
+        selector: '#particles',
+        maxParticles: 200,
+        color: ['#fff', '#fffffa', '#eeeeff'],
+        connectParticles: false,
+    });
+    };
+
+</script>
+
+
+
+</body>

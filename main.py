@@ -9,3 +9,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/")
 async def read_root():
     return FileResponse("index.html")
+
+@app.get("/splash")
+async def read_splash():
+    return FileResponse("splash.html")
