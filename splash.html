@@ -2,10 +2,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="./static/tailwind.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="./static/iso-3-to-iso-2.js"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+        
+
+    <title>Leading AI</title>
 
 
     <!-- Fonts -->
@@ -14,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
 
 
     <!-- Load d3.js -->
@@ -150,17 +156,21 @@
                 transition: border 1.0s linear, box-shadow 1.0s linear;
     }
 
+    body, html{
+        touch-action: pan-y;
+    }
+
 
 </style>
 <body>
 
     <div id="pinnedContent0" class="grid grid-cols-1 place-items-center absolute" style="z-index: 1000; width: 100vw">
         <div>
-            <div class="flex justify-center" data-aos="zoom-in">
+            <div class="flex justify-center">
                 <h1 class="text-white text-4xl md:text-8xl manrope-title p-3 text-center"> Leading AI</h1>
             </div>
             <div>
-                <h2 class="text-white p-3 ms-2" data-aos="zoom-in">A data visualization project</h2>
+                <h2 class="text-white p-3 ms-2">A data visualization project</h2>
             </div>
 
         </div>
@@ -177,8 +187,10 @@
                     </h1>
 
                 </div>
-            </div>
 
+                
+            </div>
+            
         </div>
         
     </div>
@@ -233,7 +245,7 @@
         
     </div>
 
-    <div id="headlines" class="absolute grid grid-cols-1 lg:grid-cols-3 w-full gap-6 py-10 px-4 z-4" style="top: 250vh;">
+    <div id="headlines" class="absolute grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full gap-6 py-10 px-4 z-4" style="top: 250vh;">
 
         
 
@@ -278,137 +290,826 @@
     </div>
 
 
-    <div id="scene-2" class="full-screen grid grid-cols-1 justify-items-center">
-        <div id="rankingTitle" class="text-center text-8xl anton-regular w-full pt-16" style="color: #e87c6b; width: 100vw;">
-            Global Rankings
-        </div>
-
-        <canvas id="rankingCanvas" style="
-            width: 80vw;
-            height: 80vh;
-            background-color: #008b0c;
+    <div id="scene-2" class="grid grid-cols-1 justify-items-center">
         
-        "></canvas>
+
+        <div id="graphics" style="width: 100vw; height: 100vh;">
+            <div class="w-full h-full grid grid-cols-1 place-content-center" style="background-color: #eeead5; width: 100vw;">
+                <h1 class="text-center h-full border-10 m-4 rounded" style="
+                    font-family: 'Manrope', sans-serif;
+                    font-weight: 800;
+                    font-style: normal;
+                    font-size: 4vw;
+                    color: #000535A6;
+                    ">Scroll to start Data visualization</h1>
+                
+
+                <dotlottie-player class="m-4 place-self-center" src="https://lottie.host/400d3cf6-2e30-408d-9c4b-aa02a804d16c/rNHh19YNm8.json" background="transparent" speed="1" style="width: 40vw;" loop autoplay></dotlottie-player>
+            </div>
+        
+        </div>
 
     </div>
 
-    <div id="scene-3" class="full-screen">
+    
+
+    <div id="scene-3" class="full-screen grid grid-cols-1">
         <div class="text-center text-6xl ibm-plex-sans-semibold w-full pt-16" style="color: #cdcdcd; width: 100vw;">
             Interactive Map
         </div>
+        <dotlottie-player class="place-self-center my-4" src="https://lottie.host/a3fec1ce-a871-465c-8188-afa219da01b5/2sLsGG5yPp.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+        
+            <h2 class="place-self-center text-center" style="
+                font-family: 'Manrope', sans-serif;
+                font-weight: 800;
+                font-style: normal;
+                font-size: 2em;
+            ">To visualize the dataset further, we have built an interactive map with which you can explore the A.I. index.</h2>
+
+
+        <div class="button bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full place-self-center my-4" onclick="document.getElementById('map').scrollIntoView({behavior:'smooth', block:'start'})">Explore the map</div>
+
+
+            
+        
+    </div>
+
+    <div class="full-screen" id="map">
+        <iframe src="/map" class="w-4/5 h-4/5" style="border: 0; width: 100vw; height: 100vh;"></iframe>
     </div>
         
 
 <script>
 
     // init ScrollMagic Controller
-    let controller = new ScrollMagic.Controller();
+    let controller;
     let wHeight = $(window).height();
-    console.log(wHeight);
+    let wWidth = $(window).width();
     AOS.init();
 
-    // Create first scene
-    new ScrollMagic.Scene({
-        triggerElement: "#scene-0",
-        duration:  wHeight ,
-        triggerHook: 0,
-        reverse: true
-    })
-    .setPin("#particles")
-    .addTo(controller);
-
-    // get the y coordinate difference between the top of pinnedContent0 and IntroText, then add it to the height of pinnedContent0
-    let pinnedContent0Offset = $("#pinnedContent0").offset().top + ($("#pinnedContent0").height() * 1.3);
-    let introTextOffset = $("#introText").offset().top;
-    let durationTitle = introTextOffset - pinnedContent0Offset;
-
-    // Create first scene
-    new ScrollMagic.Scene({
-        triggerElement: "#pinnedContent0",
-        duration:  durationTitle,
-        triggerHook: 'onCenter',
-        reverse: true
-    })
-    .setPin("#pinnedContent0")
-    .addTo(controller);
-
-    // Pin each headline
-    new ScrollMagic.Scene({
-        triggerElement: "#scene-1",
-        duration:  wHeight,
-        triggerHook: 0,
-        reverse: true
-    })
-    .setPin("#scene-1")
-    .addTo(controller);
-
-    // pin butWhy for the whole height of headlines
-    let headlinesHeight = $("#headlines").height();
-
-
-
-    new ScrollMagic.Scene({
-        triggerElement: "#butWhy",
-        duration:  headlinesHeight / 2,
-        triggerHook: 'onCenter',
-        reverse: true
-    })
-    .setPin("#butWhy")
-    .addTo(controller);
-
-    // Set the top value of headlines to be after the introText section
-    let introTextHeight = $("#introText").height();
-    let introTextTop = $("#introText").offset().top;
-    let headlinesTop = introTextTop + introTextHeight;
-    $("#headlines").css("top", headlinesTop);
-
-    // set scene1 to be the same height  as introText + headlines
-    let scene1Duration = introTextHeight + headlinesHeight - 0.5 * wHeight;
-    $("#scene-1").css("height", scene1Duration);
-
-
-    // add a callback to scene 2 that changes the background color of the canvas depending on the scroll position
-    let canvas = document.getElementById("rankingCanvas");
-    let ctx = canvas.getContext("2d");
-    let canvasHeight = canvas.height;
-    let canvasWidth = canvas.width;
-    let colors = ["#e87c6b", "#ffcc75", "#75f075", "#59eac8", "#79ccfc", "#e6a0ff", "#cdcdcd"];
-    let colorIndex = 0;
-    let color = colors[colorIndex];
-    let colorChange = wHeight / 7;
-
-    // add scene 2
-    new ScrollMagic.Scene({
-        triggerElement: "#scene-2",
-        duration:  wHeight * 2 ,
-        triggerHook: 0,
-        reverse: true
-    })
-    .on("progress", function (e) {
-        let progress = e.progress;
-        let newColorIndex = Math.floor(progress * 7);
-        if (newColorIndex != colorIndex) {
-            colorIndex = newColorIndex;
-            color = colors[colorIndex];
-            ctx.fillStyle = color;
-            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+    function initPage() {
+        // if the controller is not null, destroy scenes
+        if (controller) {
+            controller.destroy(true);
         }
-    })
-    .setPin("#scene-2")
-    .addTo(controller);
+
+        console.log("calculating page scenes...");
+
+        // create a new controller
+        controller = new ScrollMagic.Controller();
+
+        // Create first scene
+        new ScrollMagic.Scene({
+            triggerElement: "#scene-0",
+            duration:  wHeight ,
+            triggerHook: 0,
+            reverse: true
+        })
+        .setPin("#particles")
+        .addTo(controller);
+
+        // get the y coordinate difference between the top of pinnedContent0 and IntroText, then add it to the height of pinnedContent0
+        let pinnedContent0Offset = $("#pinnedContent0").offset().top + ($("#pinnedContent0").height() * 1.3);
+        let introTextOffset = $("#introText").offset().top;
+        let durationTitle = introTextOffset - pinnedContent0Offset;
+
+        // Create first scene
+        new ScrollMagic.Scene({
+            triggerElement: "#pinnedContent0",
+            duration:  durationTitle,
+            triggerHook: 0.3,
+            reverse: true
+        })
+        .setPin("#pinnedContent0")
+        .addTo(controller);
+
+        // Pin each headline
+        new ScrollMagic.Scene({
+            triggerElement: "#scene-1",
+            duration:  wHeight,
+            triggerHook: 0,
+            reverse: true
+        })
+        .setPin("#scene-1")
+        .addTo(controller);
+
+        // pin butWhy for the whole height of headlines
+        let headlinesHeight = $("#headlines").height();
+
+
+
+        new ScrollMagic.Scene({
+            triggerElement: "#butWhy",
+            duration:  headlinesHeight / 2,
+            triggerHook: 0.3,
+            reverse: true
+        })
+        .setPin("#butWhy")
+        .addTo(controller);
+
+        // Set the top value of headlines to be after the introText section
+        let introTextHeight = $("#introText").height();
+        let introTextTop = $("#introText").offset().top;
+        let headlinesTop = introTextTop + introTextHeight;
+        $("#headlines").css("top", headlinesTop);
+
+        // set scene1 to be the same height  as introText + headlines
+        let scene1Duration = introTextHeight + headlinesHeight - 0.5 * wHeight;
+        $("#scene-1").css("height", scene1Duration);
+
+        
+        // Check to see if we are in landscape or portrait mode
+        let isPortrait = window.matchMedia("(orientation: portrait)").matches;
+        console.log("Portrait:" + isPortrait);
+
+        // list of graphs to be displayed
+        const graphScenes = [top15Chart, gdpBubbleChart]
+        let currentGraphScene = -1  ;
+
+        // add scene 2
+        new ScrollMagic.Scene({
+            triggerElement: "#graphics",
+            duration:  wHeight * 2.5,
+            triggerHook: 0,
+            reverse: true
+        })
+        .on("progress", function (e) {
+
+            // split the progress into 2 sections
+            let progress = e.progress;
+            let section = Math.min(Math.floor(progress * 2),1);
+            if (section != currentGraphScene) {
+                currentGraphScene = section;
+                let sceneFunc = graphScenes[currentGraphScene];
+                if (sceneFunc) {
+                    sceneFunc();
+                }
+                console.log("Progress: " + section);
+            }
+
+        })
+        .setPin("#graphics")
+        .addTo(controller);
 
     
 
+        // set the top value of the interactive map to be after the ranking section
+        let rankingTop = $("#scene-2").offset().top + $("#scene-2").height();
+        //$("#scene-3").css("top", rankingTop);
+
+        return $(window).width(), $(window).height();
+
+    }
+
+    // First init
+    let lastWidth, lastHeight = initPage();
+
+    
+
+    // Reinit on resize
+    $(window).resize(function() {
+        if ($(window).width() != lastWidth || $(window).height() != lastHeight) {
+            lastWidth, lastHeight = initPage();
+        } else {
+            console.log("No resize needed");
+            return;
+        }
+    });
+
+    // load the json data asynchronously from /static/data-classic.json
+    let jsonData = null;
+    let gdpData = null;
+    let top15;
+    async function loadData() {
+        $.getJSON("/static/data-classic.json", function(data) {
+            jsonData = data;
+            console.log(jsonData);
+
+            console.log("Data loaded");
+            orderData();
+
+            $.getJSON("/static/gdp.json", function(data) {
+                gdpData = data;
+            });
+        });
+
+        
+    }
+
+    // order the data by the total score and get the top 20 countries
+    function orderData() {
+        top15 = [];
+        items = Object.keys(jsonData).map(function(key) {
+            return [key, jsonData[key]];
+        });
+
+        items.sort(function(first, second) {
+            return second[1].TotalScore - first[1].TotalScore;
+        });
+
+        for (let i = 0; i < 15; i++) {
+            top15.push(items[i]);
+        }
+
+        console.log(top15);
+        
+    }
+    
+    loadData();
+
+    // Create a D3 js chart showing the top 20 countries
+    // Target: #rankingCanvas
+
+    let graphCanvas = document.getElementById("graphics");
+    let graphWidth = wWidth;
+    let graphHeight = wHeight;
+    let graphMargin = {top: 20, right: 50, bottom: 20, left: 50};
+
+    
+
+    function top15Chart() {
+
+        // remove any children in the canvas
+        d3.select(graphCanvas).selectAll("*").remove();
+
+        // add a colored background to the canvas
+        d3.select(graphCanvas)
+            .style("background-color", "#eeead5");
+        
+        const titleMargin = 0.1 * graphHeight;
+
+        const x = d3.scaleLinear()
+            .domain([0, 100])
+            .range([graphMargin.left, graphWidth - graphMargin.right]);
+
+        const y = d3.scaleBand()
+            .domain(d3.range(15))
+            .range([graphMargin.top, graphHeight - graphMargin.bottom - titleMargin])
+            .padding(0.1);
+
+        
+
+        const svg = d3.select(graphCanvas)
+            .append("svg")
+            .attr("width", graphWidth)
+            .attr("height", graphHeight);
+            
+
+        svg.append("g")
+            .selectAll()
+            .data(top15)
+            .join("rect")
+            .attr("x", x(0))
+            .attr("y", (d, i) => y(i) + titleMargin)
+            .attr("height", y.bandwidth())
+            // make rounded corners
+            .attr("rx", 10)
+            // animate the rectangle so that it grows from the left
+            .transition()
+            .duration(800)
+            .attr("width", d => x(d[1].TotalScore) - x(0))
+
+        svg.append("g")
+            .selectAll()
+            .data(top15)
+            // add a text node for each country
+            .join("text")
+            .attr("x", x(2))
+            .attr("y", (d, i) => y(i) + y.bandwidth() / 2 + titleMargin)
+            .attr("dy", "0.35em")
+            .text(d => {
+                return d[0] ;
+            })
+            .attr("fill", "white")
+            .attr("font-size", "2em")
+            .attr("font-family", "Rubik Mono One")
+            .attr("font-weight", "400")
+            // animate opacity so that it fades in
+            .attr("opacity", 0)
+            .transition()
+            .duration(800)
+            .attr("opacity", 1);
+        
+        // Add total score to the right of the bar
+        svg.append("g")
+            .selectAll()
+            .data(top15)
+            .join("text")
+            .attr("x", d => x(0))
+            .attr("y", (d, i) => y(i) + y.bandwidth() / 2 + titleMargin)
+            .attr("dy", "0.35em")
+            .text("0")
+            .attr("fill", "black")
+            .attr("font-size", "1.5em")
+            .attr("font-family", "Rubik Mono One")
+            .attr("font-weight", "400")
+            // transition the text so that it increases until reaching the correct value
+            .transition()
+            .duration(800)
+            .tween("text", function(d) {
+                let i = d3.interpolate(0, d[1].TotalScore);
+                return function(t) {
+                    // format to 2 decimal places
+                    let rounded = i(t).toFixed(2);
+                    d3.select(this).text(rounded);
+                };
+            })
+            // transition the position of the text so that it moves to the right
+            // Use a tween so that if the target x exceeds 80% of the max we cap it and set it to white
+            .tween("x", function(d) {
+                let i = d3.interpolate(10, x(d[1].TotalScore));
+                return function(t) {
+                    let newX = i(t);
+                    if (newX > 0.8 * graphWidth) {
+                        d3.select(this).attr("x", x(100) - 150).attr("fill", "white");
+                    } else {
+                        d3.select(this).attr("x", Math.max( newX + 10, x(0) + 10));
+                    }
+                };
+            });
+
+        const title = "Top 15 Countries in A.I";
+        // Add a title to the chart
+        svg.append("g")
+            .append("text")
+            .attr("x", graphWidth / 2)
+            .attr("y", titleMargin / 2)
+            .attr("dy", "0.35em")
+            .text("")
+            .attr("fill", "black")
+            .attr("font-size", "4vw")
+            .attr("font-family", "Rubik Mono One")
+            .attr("font-weight", "400")
+            .attr("text-anchor", "middle")
+            // add a tween so that the title appears letter by letter
+            .transition()
+            .duration(2000)
+            .tween("text", function() {
+                let i = 0;
+                let titleLength = title.length;
+                return function(t) {
+                    let newText = title.substring(0, Math.floor(i * titleLength));
+                    d3.select(this).text(newText);
+                    i += 0.01;
+                };
+            });
+
+    }
+
+    function gdpBubbleChart() {
+        /**
+         * Create a bubble chart: x = Total Score, y = GDP per capita, size = -, color = Region
+         * Target: #graphics
+         */
+
+        // remove any children in the canvas
+        d3.select(graphCanvas).selectAll("*").remove();
+
+        let currentSelectedView = 'default';
+
+        // set the margin for the chart
+        const titleMargin = 0.1 * graphHeight;
+
+        // prepare data in the form [ISO 3 code, {Score, GDP, GDPPC, Region}]
+        const series = Object.keys(jsonData).map(function(key) {
+            // try to load corresponding data from gdpData
+            let entry;
+
+            let score = jsonData[key].TotalScore;
+            let gdp = 0;
+            let gdppc = 0;
+            let region = jsonData[key].Region;
+            let polScore = jsonData[key].GovernmentStrategy;
+
+            try {
+                entry = gdpData[key]
+                gdp = entry.GDP;
+                gdppc = entry.GDPPerCapita;
+            } catch (e) {
+                console.log("Error loading data for " + key);
+            }
+            
+            console.log(key, score, gdp, gdppc, region);
+            return [key, {TotalScore: score, GDP: gdp, GDPPerCapita: gdppc, Region: region, PoliticalScore: polScore}];
+        });
+        console.log(series);
+
+        // set the x scale to be linear
+        const x = d3.scaleLinear()
+            .domain([0, d3.max(series, d => d[1].TotalScore) * 1.1])
+            .range([graphMargin.left, graphWidth - graphMargin.right]);
+
+        // set the y scale to be linear, but invert the domain
+        const y = d3.scaleLinear()
+            .domain([-100, d3.max(series, d => d[1].GDPPerCapita) * 1.1])
+            .range([graphHeight- titleMargin - graphMargin.bottom, graphMargin.top + titleMargin]);
+
+        // log the domain of the y scale
+        console.log(y.domain());
+
+        // set the size scale to be linear
+        const size = d3.scaleLinear()
+            .domain([0, 100])
+            .range([0, 70]);
+
+        const gdpSizing = d3.scaleSqrt()
+            .domain([0, d3.max(series, d => d[1].GDP)])
+            .range([0, 100]);
+
+        const polSizing = d3.scalePow()
+            .domain([0, 100])
+            .range([10, 50])
+            .exponent(4);
 
 
-    // Set the height of the ranking canvas to be wheight - height of rankingTitle - 50px
-    let rankingTitleHeight = $("#rankingTitle").height();
-    let rankingCanvasHeight = wHeight - rankingTitleHeight - 100;
-    $("#rankingCanvas").css("height", rankingCanvasHeight);
+        // set the color scale to be ordinal
+        const color = d3.scaleOrdinal()
+            .domain(["Africa", "Asia-Pacific", "Europe", "Oceania", "Middle East"])
+            .range(d3.schemeCategory10);
 
-    // set the top value of the interactive map to be after the ranking section
-    let rankingTop = $("#scene-2").offset().top + $("#scene-2").height();
-    //$("#scene-3").css("top", rankingTop);
+        const uniquePoliticalValues = [];
+        for ( ctr in jsonData) {
+            if (!uniquePoliticalValues.includes(jsonData[ctr].PoliticalRegime)) {
+                uniquePoliticalValues.push(jsonData[ctr].PoliticalRegime);
+            }
+        }
+        console.log(uniquePoliticalValues);
+
+        const politicalColouring = d3.scaleOrdinal()
+            .domain(uniquePoliticalValues)
+            .range(["#00D9D6", "#C70039", "#2FF988 ", "#FF5733"]);
+
+        // create the svg element
+        const svg = d3.select(graphCanvas)
+            .append("svg")
+            .attr("width", graphWidth)
+            .attr("height", graphHeight);
+
+        // add the axis to the chart with labels and ticks
+        const xAxis = g => g
+            .attr("transform", `translate(0,${graphHeight - graphMargin.bottom - titleMargin})`)
+            .call(d3.axisBottom(x).ticks(graphWidth / 80).tickSizeOuter(0))
+            .call(g => g.append("text")
+                .attr("x", graphWidth - graphMargin.right)
+                .attr("y", -4)
+                .attr("fill", "currentColor")
+                .attr("font-weight", "bold")
+                .attr("text-anchor", "end")
+                .text("Index Score"));
+
+        const yAxis = g => g
+            .attr("transform", `translate(${graphMargin.left}, 0)`)
+            .call(d3.axisLeft(y).ticks(graphHeight / 80).tickSizeOuter(0))
+            .call(g => g.append("text")
+                .attr("x",10)
+                .attr("y", titleMargin + 30)
+                .attr("fill", "currentColor")
+                .attr("font-weight", "bold")
+                .attr("text-anchor", "start")
+                .text("GDP per Capita"));
+
+        // add the x axis to the chart
+        svg.append("g")
+            .call(xAxis);
+
+        // add the y axis to the chart
+        svg.append("g")
+            .call(yAxis);
+
+        // add a scale on the bottom center for the coloring showing the different colors using d3 color legend
+        
+
+        function updateColorLegend(clr) {
+
+            // remove the legend if it exists
+            svg.selectAll(".legend").remove();
+
+            const legend = svg.append("g")
+            // set class to legend
+            .attr("class", "legend")
+            .attr("transform", `translate(0, ${graphHeight - graphMargin.bottom})`)
+            .attr("font-family", "Rubik Mono One")
+            .attr("font-size", 10)
+            .attr("text-anchor", "middle")
+            .selectAll("g")
+            .data(clr.domain())
+            .join("g")
+            .attr("transform", (d, i) => `translate(${i * (wWidth / clr.domain().length)}, 0)`);
+
+            legend.append("rect")
+                .attr("x", 0)
+                .attr("width", (wWidth / clr.domain().length))
+                .attr("height", 20)
+                .attr("fill", clr)
+                .attr("fill-opacity", 0.6);
+
+            legend.append("text")
+                .attr("x", (wWidth / clr.domain().length / 2))
+                .attr("y", 10)
+                .attr("dy", "0.35em")
+                .text(d => d)
+                .attr("fill", "black")
+                .attr("font-size", "1vw");
+        }
+
+        updateColorLegend(color);
+
+
+        // add the bubbles to the chart
+        svg.append("g")
+            .selectAll("circle")
+            .data(series)
+            .join("circle")
+            // set the class of the bubble to "bubble"
+            .attr("class", "bubble")
+            .attr("fill", d => color(d[1].Region))
+            .attr("fill-opacity", 0.6)
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("cx", d => x(0))
+            .attr("cy", d => y(0))
+            .attr("r", 5)
+            // first transition the position only
+            .transition()
+            .duration(1500)
+            .attr("cx", d => x(d[1].TotalScore))
+            .attr("cy", d => y(d[1].GDPPerCapita))
+            // then transition the size
+            .transition()
+            .duration(800)
+            .attr("r", d => 15);
+
+        // add short labels for each bubble
+        svg.append("g")
+            .selectAll("text")
+            .data(series)
+            .join("text")
+            .attr("x", d => x(d[1].TotalScore))
+            .attr("y", d => y(d[1].GDPPerCapita))
+            .attr("dy", "0.3em")
+            .text(d => d[0])
+            .attr("fill", "black")
+            .attr("font-size", "0.5em")
+            .attr("font-family", "Rubik Mono One")
+            .attr("font-weight", "200")
+            .attr("text-anchor", "middle")
+            .attr("opacity", 0)
+            .transition()
+            .duration(800)
+            .attr("opacity", 1);
+        
+
+
+        // add an interactive popup for each bubble on hover
+        svg.append("g")
+            .selectAll("circle")
+            .data(series)
+            .join("circle")
+            .attr("fill", "none")
+            .attr("pointer-events", "all")
+            // set the class to "tooltip-detector"
+            .attr("class", "tooltip-detector")
+
+            .attr("stroke", "none")
+            .attr("cx", d => x(d[1].TotalScore))
+            .attr("cy", d => y(d[1].GDPPerCapita))
+            .attr("r", d => {
+
+                if (currentSelectedView == 'default') {
+                    return 10;
+                } else {
+                    return gdpSizing(d[1].GDP);
+                }
+
+            })
+            .on("mouseover", function(e, d) {
+                d3.select(this)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 2)
+                    .attr("r", d => {
+
+                        if (currentSelectedView == 'default') {
+                            return 15;
+                        } else if (currentSelectedView == 'gdp') {
+                            return gdpSizing(d[1].GDP) + 5;
+                        } else if (currentSelectedView == 'political') {
+                            return polSizing(d[1].PoliticalScore) + 5;
+                        }
+
+                    });
+                // add a tooltip to the chart
+                svg.append("g")
+                    .attr("id", "tooltip")
+                    // bound the position so that it doesn't go off the screen
+                    .attr("x", Math.min(x(d[1].TotalScore) + 30, graphWidth - 200))
+                    .attr("y", Math.min(y(d[1].GDPPerCapita) + 40, graphHeight - graphMargin.bottom - 150))
+                    .append("text")
+                    // attach the position of the parent
+                    .attr("x", Math.min(x(d[1].TotalScore) + 30, graphWidth - 200))
+                    .attr("y", Math.min(y(d[1].GDPPerCapita) + 40, graphHeight - graphMargin.bottom - 150))
+
+                    .text(jsonData[d[0]].Country)
+                    // give a max width for the text and make sure it creates new lines
+                    .attr("fill", "black")
+                    .attr("font-size", "1em")
+                    .attr("font-family", "Rubik Mono One")
+                    .attr("font-weight", "400")
+
+                    
+                    .call(wrap, 200)
+                    // return to the parent
+                    .select(function() {
+                        return this.parentNode;
+                    })
+
+                    .append("text")
+                    .attr("x", Math.min(x(d[1].TotalScore) + 30, graphWidth - 200))
+                    .attr("y", Math.min(y(d[1].GDPPerCapita) + 40 + 40, graphHeight - graphMargin.bottom - 150 + 40))
+                    .text(() => {
+                        if (currentSelectedView == 'default') {
+                            return "Region: " + jsonData[d[0]].Region;
+                        } else if (currentSelectedView == 'gdp') {
+                            let formatedGDP = d3.format(",.0f")(d[1].GDP / 1000000);
+
+                            return "GDP: " + formatedGDP + " M$";
+                        } else if (currentSelectedView == 'political') {
+                            return "GS score: " + jsonData[d[0]].GovernmentStrategy;
+                        }
+                        
+
+                    })
+                    .attr("fill", "black")
+                    .attr("font-size", "1em")
+                    .attr("font-family", "Rubik Mono One")
+                    .attr("font-weight", "400")
+                    .call(wrap, 200)
+                    
+                    // return to the parent and add a white background
+                    .select(function() {
+                        return this.parentNode;
+                    })
+                    .insert("rect", "text")
+                    .attr("x", Math.min(x(d[1].TotalScore) + 30, graphWidth - 200) - 5)
+                    .attr("y", Math.min(y(d[1].GDPPerCapita) + 40, graphHeight - graphMargin.bottom - 150) - 20)
+                    .attr("width", 200)
+                    .attr("height", 90)
+                    .attr("fill", "white")
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1)
+                    .attr("rx", 5)
+                    .attr("ry", 5);
+
+                    
+                    ;
+            })
+            .on("mouseout", function(e, d) {
+                d3.select(this)
+                    .attr("stroke", "none")
+                d3.select("#tooltip").remove();
+            });
+        
+
+        const labelXOffset = wWidth / 5;
+
+        // Add a rounded menu box on the top right to select different size variables
+        svg.append("g")
+
+            // append an interactive clickable button to size the bubbles by GDP with the text "View by GDP"
+            
+            // add a text node to the menu box
+            .append("text")
+            .attr("x", graphWidth - labelXOffset - graphMargin.right - 30)
+            .attr("y", titleMargin + 30)
+            .text("View by GDP")
+            .attr("fill", "black")
+            .attr("font-size", "2vw")
+            .attr("font-family", "Rubik Mono One")
+            .attr("font-weight", "400")
+            .attr("cursor", "pointer")
+            .on("click", function() {
+                currentSelectedView = 'gdp';
+                updateColorLegend(color);
+                // update the bubbles
+                d3.selectAll(".bubble")
+
+
+                    // set the standard colouring
+                    .transition()
+                    .attr("fill", d => color(d[1].Region))
+                    .duration(800)
+                    .attr("r", d => gdpSizing(d[1].GDP));
+
+                // correct the size of the tooltip detectors
+                d3.selectAll(".tooltip-detector")
+                    .attr("r", d => gdpSizing(d[1].GDP));
+            })
+            .call(wrap, labelXOffset);
+
+        
+
+        svg.append("g")
+
+            // append an interactive clickable button to size the bubbles by GDP with the text "View by GDP"
+            
+            // add a text node to the menu box
+            .append("text")
+            .attr("x", graphWidth - labelXOffset - graphMargin.right - 30)
+            .attr("y", titleMargin + 30 + 40)
+            .text("View Government Strategy")
+            .attr("fill", "black")
+            .attr("font-size", "2vw")
+            .attr("font-family", "Rubik Mono One")
+            .attr("font-weight", "400")
+            .attr("cursor", "pointer")
+            .on("click", function() {
+                currentSelectedView = 'political';
+                updateColorLegend(politicalColouring);
+                // update the bubbles
+                d3.selectAll(".bubble")
+
+
+                    // set the standard colouring
+                    .transition()
+                    .attr("fill", d => politicalColouring(jsonData[d[0]].PoliticalRegime))
+                    .duration(800)
+                    .attr("r", d => polSizing(d[1].PoliticalScore));
+
+                // correct the size of the tooltip detectors
+                d3.selectAll(".tooltip-detector")
+                    .attr("r", d => polSizing(d[1].PoliticalScore));
+            })
+            .call(wrap, labelXOffset);
+
+
+        // add a title to the chart
+        svg.append("g")
+            .append("text")
+            .attr("x", graphWidth / 2)
+            .attr("y", titleMargin / 2)
+            .attr("dy", "0.35em")
+            .text("A.I. Index vs GDP per Capita")
+            .attr("fill", "black")
+            .attr("font-size", "4vw")
+            .attr("font-family", "Rubik Mono One")
+            .attr("font-weight", "400")
+            .attr("text-anchor", "middle")
+            .transition()
+            .duration(2000)
+            .tween("text", function() {
+                let i = 0;
+                let titleLength = "A.I. Index vs GDP per Capita".length;
+                return function(t) {
+                    let newText = "A.I. Index vs GDP per Capita".substring(0, Math.floor(i * titleLength));
+                    d3.select(this).text(newText);
+                    i += 0.01;
+                };
+            });
+        
+        
+
+
+
+
+
+
+
+    }
+
+    function wrap(text, width) {
+        text.each(function () {
+            var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                x = text.attr("x"),
+                y = text.attr("y"),
+                dy = 0, //parseFloat(text.attr("dy")),
+                tspan = text.text(null)
+                            .append("tspan")
+                            .attr("x", x)
+                            .attr("y", y)
+                            .attr("dy", dy + "em");
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word];
+                    tspan = text.append("tspan")
+                                .attr("x", x)
+                                .attr("y", y)
+                                .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                                .text(word);
+                }
+            }
+        });
+    }
+
+    
+
 
 
 

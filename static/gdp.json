@@ -1,0 +1,1332 @@
+{
+    "ABW": {
+        "Country": "Aruba",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "AFE": {
+        "Country": "Africa Eastern and Southern",
+        "GDP": 920792331527.746,
+        "GDPPerCapita": 1359.61822418526
+    },
+    "AFG": {
+        "Country": "Afghanistan",
+        "GDP": 20116137325.8206,
+        "GDPPerCapita": 516.747870807558
+    },
+    "AFW": {
+        "Country": "Africa Western and Central",
+        "GDP": 784587603322.866,
+        "GDPPerCapita": 1710.07336335627
+    },
+    "AGO": {
+        "Country": "Angola",
+        "GDP": 58375976292.9678,
+        "GDPPerCapita": 1776.16686789531
+    },
+    "ALB": {
+        "Country": "Albania",
+        "GDP": 14887629268.2927,
+        "GDPPerCapita": 5246.29230634793
+    },
+    "AND": {
+        "Country": "Andorra",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "ARB": {
+        "Country": "Arab World",
+        "GDP": 2447584445275.52,
+        "GDPPerCapita": 5612.68656952782
+    },
+    "ARE": {
+        "Country": "United Arab Emirates",
+        "GDP": 358868765174.924,
+        "GDPPerCapita": 36284.5552429552
+    },
+    "ARG": {
+        "Country": "Argentina",
+        "GDP": 389288056265.325,
+        "GDPPerCapita": 8579.01777315683
+    },
+    "ARM": {
+        "Country": "Armenia",
+        "GDP": 12641209802.112,
+        "GDPPerCapita": 4266.01807420946
+    },
+    "ASM": {
+        "Country": "American Samoa",
+        "GDP": 709000000.0,
+        "GDPPerCapita": 12844.9009909959
+    },
+    "ATG": {
+        "Country": "Antigua and Barbuda",
+        "GDP": 1370281481.48148,
+        "GDPPerCapita": 13992.7444804497
+    },
+    "AUS": {
+        "Country": "Australia",
+        "GDP": 1327836171068.51,
+        "GDPPerCapita": 51692.8427477695
+    },
+    "AUT": {
+        "Country": "Austria",
+        "GDP": 433258467676.515,
+        "GDPPerCapita": 48586.8013213238
+    },
+    "AZE": {
+        "Country": "Azerbaijan",
+        "GDP": 42607176470.5882,
+        "GDPPerCapita": 4221.40747847848
+    },
+    "BDI": {
+        "Country": "Burundi",
+        "GDP": 2841786382.19063,
+        "GDPPerCapita": 238.990725856496
+    },
+    "BEL": {
+        "Country": "Belgium",
+        "GDP": 521861292586.616,
+        "GDPPerCapita": 45159.3482229717
+    },
+    "BEN": {
+        "Country": "Benin",
+        "GDP": 15651545331.5404,
+        "GDPPerCapita": 1291.04097215441
+    },
+    "BFA": {
+        "Country": "Burkina Faso",
+        "GDP": 17933606353.1775,
+        "GDPPerCapita": 857.932729650223
+    },
+    "BGD": {
+        "Country": "Bangladesh",
+        "GDP": 323056957972.312,
+        "GDPPerCapita": 1961.6137487886
+    },
+    "BGR": {
+        "Country": "Bulgaria",
+        "GDP": 69889347433.4324,
+        "GDPPerCapita": 10079.2033812203
+    },
+    "BHR": {
+        "Country": "Bahrain",
+        "GDP": 34729228723.4043,
+        "GDPPerCapita": 20409.9528047731
+    },
+    "BHS": {
+        "Country": "Bahamas, The",
+        "GDP": 9907500000.0,
+        "GDPPerCapita": 25194.0251444381
+    },
+    "BIH": {
+        "Country": "Bosnia and Herzegovina",
+        "GDP": 19946496562.9733,
+        "GDPPerCapita": 6079.73828544838
+    },
+    "BLR": {
+        "Country": "Belarus",
+        "GDP": 60258239055.5829,
+        "GDPPerCapita": 6424.15217642722
+    },
+    "BLZ": {
+        "Country": "Belize",
+        "GDP": 1636280797.08056,
+        "GDPPerCapita": 4115.17700795622
+    },
+    "BMU": {
+        "Country": "Bermuda",
+        "GDP": 6842700000.0,
+        "GDPPerCapita": 107079.479836627
+    },
+    "BOL": {
+        "Country": "Bolivia",
+        "GDP": 36572764862.8234,
+        "GDPPerCapita": 3133.09980321504
+    },
+    "BRA": {
+        "Country": "Brazil",
+        "GDP": 1444733258971.65,
+        "GDPPerCapita": 6796.84454227877
+    },
+    "BRB": {
+        "Country": "Barbados",
+        "GDP": 4418000000.0,
+        "GDPPerCapita": 15373.8547035017
+    },
+    "BRN": {
+        "Country": "Brunei Darussalam",
+        "GDP": 12005825769.5087,
+        "GDPPerCapita": 27442.95382794
+    },
+    "BTN": {
+        "Country": "Bhutan",
+        "GDP": 2315437338.08809,
+        "GDPPerCapita": 3000.77932702976
+    },
+    "BWA": {
+        "Country": "Botswana",
+        "GDP": 15061922801.6271,
+        "GDPPerCapita": 6404.89993159074
+    },
+    "CAF": {
+        "Country": "Central African Republic",
+        "GDP": 2380087758.04137,
+        "GDPPerCapita": 492.79587119399
+    },
+    "CAN": {
+        "Country": "Canada",
+        "GDP": 1645423407568.36,
+        "GDPPerCapita": 43294.6481631917
+    },
+    "CEB": {
+        "Country": "Central Europe and the Baltics",
+        "GDP": 1653247533863.81,
+        "GDPPerCapita": 16168.1966521921
+    },
+    "CHE": {
+        "Country": "Switzerland",
+        "GDP": 752248045730.11,
+        "GDPPerCapita": 87097.0364503764
+    },
+    "CHI": {
+        "Country": "Channel Islands",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "CHL": {
+        "Country": "Chile",
+        "GDP": 252940023046.007,
+        "GDPPerCapita": 13231.7042069381
+    },
+    "CHN": {
+        "Country": "China",
+        "GDP": 14722730697890.1,
+        "GDPPerCapita": 10434.7751874839
+    },
+    "CIV": {
+        "Country": "Cote d'Ivoire",
+        "GDP": 61348579465.1017,
+        "GDPPerCapita": 2325.72370502247
+    },
+    "CMR": {
+        "Country": "Cameroon",
+        "GDP": 40804449726.0184,
+        "GDPPerCapita": 1537.13021832773
+    },
+    "COD": {
+        "Country": "Congo, Dem. Rep.",
+        "GDP": 48716960860.0664,
+        "GDPPerCapita": 543.950392515803
+    },
+    "COG": {
+        "Country": "Congo, Rep.",
+        "GDP": 10187122341.4051,
+        "GDPPerCapita": 1846.13129708695
+    },
+    "COL": {
+        "Country": "Colombia",
+        "GDP": 271437596293.843,
+        "GDPPerCapita": 5334.55604233917
+    },
+    "COM": {
+        "Country": "Comoros",
+        "GDP": 1235400352.2931,
+        "GDPPerCapita": 1420.66174747221
+    },
+    "CPV": {
+        "Country": "Cabo Verde",
+        "GDP": 1703698676.69742,
+        "GDPPerCapita": 3064.27238842819
+    },
+    "CRI": {
+        "Country": "Costa Rica",
+        "GDP": 61846895120.7808,
+        "GDPPerCapita": 12140.8541545754
+    },
+    "CSS": {
+        "Country": "Caribbean small states",
+        "GDP": 66039332389.2884,
+        "GDPPerCapita": 8873.52192883729
+    },
+    "CUB": {
+        "Country": "Cuba",
+        "GDP": 107352000000.0,
+        "GDPPerCapita": 9477.85287326771
+    },
+    "CUW": {
+        "Country": "Curacao",
+        "GDP": 2595821708.81313,
+        "GDPPerCapita": 16745.7243140176
+    },
+    "CYM": {
+        "Country": "Cayman Islands",
+        "GDP": 5591623664.9466,
+        "GDPPerCapita": 85082.5268555478
+    },
+    "CYP": {
+        "Country": "Cyprus",
+        "GDP": 24612646487.7213,
+        "GDPPerCapita": 27527.8453055825
+    },
+    "CZE": {
+        "Country": "Czech Republic",
+        "GDP": 245339322066.759,
+        "GDPPerCapita": 22931.2745975622
+    },
+    "DEU": {
+        "Country": "Germany",
+        "GDP": 3846413928653.71,
+        "GDPPerCapita": 46208.4294717472
+    },
+    "DJI": {
+        "Country": "Djibouti",
+        "GDP": 3384385216.71609,
+        "GDPPerCapita": 3425.48417585803
+    },
+    "DMA": {
+        "Country": "Dominica",
+        "GDP": 504214814.814815,
+        "GDPPerCapita": 7003.85902147233
+    },
+    "DNK": {
+        "Country": "Denmark",
+        "GDP": 356084867685.639,
+        "GDPPerCapita": 61063.3164304238
+    },
+    "DOM": {
+        "Country": "Dominican Republic",
+        "GDP": 78844702329.0785,
+        "GDPPerCapita": 7268.1969096591
+    },
+    "DZA": {
+        "Country": "Algeria",
+        "GDP": 145009181490.62,
+        "GDPPerCapita": 3306.85820838104
+    },
+    "EAP": {
+        "Country": "East Asia & Pacific (excluding high income)",
+        "GDP": 17448894596355.7,
+        "GDPPerCapita": 8254.67087102428
+    },
+    "EAR": {
+        "Country": "Early-demographic dividend",
+        "GDP": 10668243564848.3,
+        "GDPPerCapita": 3201.65253167346
+    },
+    "EAS": {
+        "Country": "East Asia & Pacific",
+        "GDP": 27097404937164.8,
+        "GDPPerCapita": 11477.7925922681
+    },
+    "ECA": {
+        "Country": "Europe & Central Asia (excluding high income)",
+        "GDP": 3222403620453.33,
+        "GDPPerCapita": 7668.52434410423
+    },
+    "ECS": {
+        "Country": "Europe & Central Asia",
+        "GDP": 22121578723066.8,
+        "GDPPerCapita": 23955.3051582784
+    },
+    "ECU": {
+        "Country": "Ecuador",
+        "GDP": 98808010000.0,
+        "GDPPerCapita": 5600.38961495341
+    },
+    "EGY": {
+        "Country": "Egypt, Arab Rep.",
+        "GDP": 365252651278.852,
+        "GDPPerCapita": 3569.20684121108
+    },
+    "EMU": {
+        "Country": "Euro area",
+        "GDP": 13021049031268.7,
+        "GDPPerCapita": 37967.8018660437
+    },
+    "ERI": {
+        "Country": "Eritrea",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "ESP": {
+        "Country": "Spain",
+        "GDP": 1281484640043.58,
+        "GDPPerCapita": 27063.1939180299
+    },
+    "EST": {
+        "Country": "Estonia",
+        "GDP": 30650285471.7215,
+        "GDPPerCapita": 23027.0269956294
+    },
+    "ETH": {
+        "Country": "Ethiopia",
+        "GDP": 107645054311.876,
+        "GDPPerCapita": 936.340461064749
+    },
+    "EUU": {
+        "Country": "European Union",
+        "GDP": 15291934754441.6,
+        "GDPPerCapita": 34148.9199001187
+    },
+    "FCS": {
+        "Country": "Fragile and conflict affected situations",
+        "GDP": 1508644836830.91,
+        "GDPPerCapita": 1622.21697567321
+    },
+    "FIN": {
+        "Country": "Finland",
+        "GDP": 269594831987.549,
+        "GDPPerCapita": 48744.9881267787
+    },
+    "FJI": {
+        "Country": "Fiji",
+        "GDP": 4533883782.27458,
+        "GDPPerCapita": 5057.63191261761
+    },
+    "FRA": {
+        "Country": "France",
+        "GDP": 2630317731455.26,
+        "GDPPerCapita": 39030.3603713482
+    },
+    "FRO": {
+        "Country": "Faroe Islands",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "FSM": {
+        "Country": "Micronesia, Fed. Sts.",
+        "GDP": 410083600.0,
+        "GDPPerCapita": 3565.293294268
+    },
+    "GAB": {
+        "Country": "Gabon",
+        "GDP": 15316826191.5682,
+        "GDPPerCapita": 6881.71519231831
+    },
+    "GBR": {
+        "Country": "United Kingdom",
+        "GDP": 2759804061837.07,
+        "GDPPerCapita": 41059.1688090547
+    },
+    "GEO": {
+        "Country": "Georgia",
+        "GDP": 15846489610.8073,
+        "GDPPerCapita": 4266.69079450924
+    },
+    "GHA": {
+        "Country": "Ghana",
+        "GDP": 68532281805.6722,
+        "GDPPerCapita": 2205.5290158584
+    },
+    "GIB": {
+        "Country": "Gibraltar",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "GIN": {
+        "Country": "Guinea",
+        "GDP": 15681050917.1563,
+        "GDPPerCapita": 1194.03786469445
+    },
+    "GMB": {
+        "Country": "Gambia, The",
+        "GDP": 1868086274.822,
+        "GDPPerCapita": 773.002070135524
+    },
+    "GNB": {
+        "Country": "Guinea-Bissau",
+        "GDP": 1431758242.90375,
+        "GDPPerCapita": 727.520171719562
+    },
+    "GNQ": {
+        "Country": "Equatorial Guinea",
+        "GDP": 10021856754.4944,
+        "GDPPerCapita": 7143.23870497146
+    },
+    "GRC": {
+        "Country": "Greece",
+        "GDP": 188835201625.91,
+        "GDPPerCapita": 17622.5410033504
+    },
+    "GRD": {
+        "Country": "Grenada",
+        "GDP": 1042100555.55556,
+        "GDPPerCapita": 9261.55187617696
+    },
+    "GRL": {
+        "Country": "Greenland",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "GTM": {
+        "Country": "Guatemala",
+        "GDP": 77604632170.5853,
+        "GDPPerCapita": 4603.33961670975
+    },
+    "GUM": {
+        "Country": "Guam",
+        "GDP": 5844000000.0,
+        "GDPPerCapita": 34624.3401290414
+    },
+    "GUY": {
+        "Country": "Guyana",
+        "GDP": 5471256594.72422,
+        "GDPPerCapita": 6955.93921717789
+    },
+    "HIC": {
+        "Country": "High income",
+        "GDP": 53461077539109.3,
+        "GDPPerCapita": 44003.4137096987
+    },
+    "HKG": {
+        "Country": "Hong Kong SAR, China",
+        "GDP": 346585881503.635,
+        "GDPPerCapita": 46323.8634424384
+    },
+    "HND": {
+        "Country": "Honduras",
+        "GDP": 23662231633.9139,
+        "GDPPerCapita": 2389.012430771
+    },
+    "HPC": {
+        "Country": "Heavily indebted poor countries (HIPC)",
+        "GDP": 797697289590.406,
+        "GDPPerCapita": 968.690499805906
+    },
+    "HRV": {
+        "Country": "Croatia",
+        "GDP": 57203783203.0259,
+        "GDPPerCapita": 14134.1626811193
+    },
+    "HTI": {
+        "Country": "Haiti",
+        "GDP": 14508218017.4032,
+        "GDPPerCapita": 1272.36799204205
+    },
+    "HUN": {
+        "Country": "Hungary",
+        "GDP": 155808436238.487,
+        "GDPPerCapita": 15980.740889649
+    },
+    "IBD": {
+        "Country": "IBRD only",
+        "GDP": 29900583521576.8,
+        "GDPPerCapita": 6149.36154443197
+    },
+    "IBT": {
+        "Country": "IDA & IBRD total",
+        "GDP": 32139314724146.1,
+        "GDPPerCapita": 4891.09025537607
+    },
+    "IDA": {
+        "Country": "IDA total",
+        "GDP": 2239424393002.2,
+        "GDPPerCapita": 1310.6751603022
+    },
+    "IDB": {
+        "Country": "IDA blend",
+        "GDP": 961669400838.282,
+        "GDPPerCapita": 1674.91787065885
+    },
+    "IDN": {
+        "Country": "Indonesia",
+        "GDP": 1058423838345.14,
+        "GDPPerCapita": 3869.58842704537
+    },
+    "IDX": {
+        "Country": "IDA only",
+        "GDP": 1278442378837.88,
+        "GDPPerCapita": 1126.93246729588
+    },
+    "IMN": {
+        "Country": "Isle of Man",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "IND": {
+        "Country": "India",
+        "GDP": 2660245248867.63,
+        "GDPPerCapita": 1927.70782309335
+    },
+    "INX": {
+        "Country": "Not classified",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "IRL": {
+        "Country": "Ireland",
+        "GDP": 425888950992.003,
+        "GDPPerCapita": 85267.7647437582
+    },
+    "IRN": {
+        "Country": "Iran, Islamic Rep.",
+        "GDP": 203471303952.344,
+        "GDPPerCapita": 2422.48065682777
+    },
+    "IRQ": {
+        "Country": "Iraq",
+        "GDP": 166756984395.973,
+        "GDPPerCapita": 4145.86293637602
+    },
+    "ISL": {
+        "Country": "Iceland",
+        "GDP": 21718075725.2054,
+        "GDPPerCapita": 59270.1800510483
+    },
+    "ISR": {
+        "Country": "Israel",
+        "GDP": 407100736594.064,
+        "GDPPerCapita": 44168.9436355026
+    },
+    "ITA": {
+        "Country": "Italy",
+        "GDP": 1888709443687.48,
+        "GDPPerCapita": 31714.2209467105
+    },
+    "JAM": {
+        "Country": "Jamaica",
+        "GDP": 13812425036.5864,
+        "GDPPerCapita": 4664.53024222133
+    },
+    "JOR": {
+        "Country": "Jordan",
+        "GDP": 43697659295.7747,
+        "GDPPerCapita": 4282.76582461621
+    },
+    "JPN": {
+        "Country": "Japan",
+        "GDP": 5057758958706.64,
+        "GDPPerCapita": 40193.2524448357
+    },
+    "KAZ": {
+        "Country": "Kazakhstan",
+        "GDP": 171082379532.988,
+        "GDPPerCapita": 9122.23343021644
+    },
+    "KEN": {
+        "Country": "Kenya",
+        "GDP": 101013726529.063,
+        "GDPPerCapita": 1878.58070251348
+    },
+    "KGZ": {
+        "Country": "Kyrgyz Republic",
+        "GDP": 7735976272.75983,
+        "GDPPerCapita": 1173.61130419926
+    },
+    "KHM": {
+        "Country": "Cambodia",
+        "GDP": 25808561550.9514,
+        "GDPPerCapita": 1543.66925757282
+    },
+    "KIR": {
+        "Country": "Kiribati",
+        "GDP": 197508774.344505,
+        "GDPPerCapita": 1653.54029724315
+    },
+    "KNA": {
+        "Country": "St. Kitts and Nevis",
+        "GDP": 980740740.740741,
+        "GDPPerCapita": 18437.7489235363
+    },
+    "KOR": {
+        "Country": "Korea, Rep.",
+        "GDP": 1637895802792.9,
+        "GDPPerCapita": 31631.4694509866
+    },
+    "KWT": {
+        "Country": "Kuwait",
+        "GDP": 105960225688.145,
+        "GDPPerCapita": 24811.7697100231
+    },
+    "LAC": {
+        "Country": "Latin America & Caribbean (excluding high income)",
+        "GDP": 4035270946811.09,
+        "GDPPerCapita": 6779.19971726486
+    },
+    "LAO": {
+        "Country": "Lao PDR",
+        "GDP": 19132635711.6957,
+        "GDPPerCapita": 2629.71458287115
+    },
+    "LBN": {
+        "Country": "Lebanon",
+        "GDP": 31735217784.5445,
+        "GDPPerCapita": 4649.54764607837
+    },
+    "LBR": {
+        "Country": "Liberia",
+        "GDP": 3201187800.0,
+        "GDPPerCapita": 632.93638561735
+    },
+    "LBY": {
+        "Country": "Libya",
+        "GDP": 25418916028.8964,
+        "GDPPerCapita": 3699.29476514318
+    },
+    "LCA": {
+        "Country": "St. Lucia",
+        "GDP": 1616772740.74074,
+        "GDPPerCapita": 8804.5610483134
+    },
+    "LCN": {
+        "Country": "Latin America & Caribbean",
+        "GDP": 4725519821856.69,
+        "GDPPerCapita": 7244.65941923722
+    },
+    "LDC": {
+        "Country": "Least developed countries: UN classification",
+        "GDP": 1114278182953.05,
+        "GDPPerCapita": 1053.75257101729
+    },
+    "LIC": {
+        "Country": "Low income",
+        "GDP": 459729949563.423,
+        "GDPPerCapita": 691.168332768345
+    },
+    "LIE": {
+        "Country": "Liechtenstein",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "LKA": {
+        "Country": "Sri Lanka",
+        "GDP": 80676681933.978,
+        "GDPPerCapita": 3680.67347661745
+    },
+    "LMC": {
+        "Country": "Lower middle income",
+        "GDP": 7384772400818.06,
+        "GDPPerCapita": 2217.21488405319
+    },
+    "LMY": {
+        "Country": "Low & middle income",
+        "GDP": 30993151083682.1,
+        "GDPPerCapita": 4754.82410045119
+    },
+    "LSO": {
+        "Country": "Lesotho",
+        "GDP": 1875227642.47384,
+        "GDPPerCapita": 875.353432963926
+    },
+    "LTE": {
+        "Country": "Late-demographic dividend",
+        "GDP": 22433389417760.0,
+        "GDPPerCapita": 9683.42515880587
+    },
+    "LTU": {
+        "Country": "Lithuania",
+        "GDP": 56546957475.4912,
+        "GDPPerCapita": 20233.6413480843
+    },
+    "LUX": {
+        "Country": "Luxembourg",
+        "GDP": 73353132793.7076,
+        "GDPPerCapita": 116014.602496869
+    },
+    "LVA": {
+        "Country": "Latvia",
+        "GDP": 33707320816.3036,
+        "GDPPerCapita": 17726.2529351368
+    },
+    "MAC": {
+        "Country": "Macao SAR, China",
+        "GDP": 25586111076.3415,
+        "GDPPerCapita": 39403.1359073362
+    },
+    "MAF": {
+        "Country": "St. Martin (French part)",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "MAR": {
+        "Country": "Morocco",
+        "GDP": 114725065285.149,
+        "GDPPerCapita": 3058.69168866957
+    },
+    "MCO": {
+        "Country": "Monaco",
+        "GDP": 6816219303.25528,
+        "GDPPerCapita": 173688.189360292
+    },
+    "MDA": {
+        "Country": "Moldova",
+        "GDP": 11915547262.6561,
+        "GDPPerCapita": 4547.05972064671
+    },
+    "MDG": {
+        "Country": "Madagascar",
+        "GDP": 13056079982.3887,
+        "GDPPerCapita": 471.491496300252
+    },
+    "MDV": {
+        "Country": "Maldives",
+        "GDP": 3742769967.42798,
+        "GDPPerCapita": 6924.10574465625
+    },
+    "MEA": {
+        "Country": "Middle East & North Africa",
+        "GDP": 3035580428041.81,
+        "GDPPerCapita": 6534.39562313779
+    },
+    "MEX": {
+        "Country": "Mexico",
+        "GDP": 1073915880822.5,
+        "GDPPerCapita": 8329.27131263927
+    },
+    "MHL": {
+        "Country": "Marshall Islands",
+        "GDP": 244462400.0,
+        "GDPPerCapita": 4129.850998412
+    },
+    "MIC": {
+        "Country": "Middle income",
+        "GDP": 30535343464998.6,
+        "GDPPerCapita": 5216.9478914951
+    },
+    "MKD": {
+        "Country": "North Macedonia",
+        "GDP": 12263710122.7645,
+        "GDPPerCapita": 5917.26257545221
+    },
+    "MLI": {
+        "Country": "Mali",
+        "GDP": 17465392915.9153,
+        "GDPPerCapita": 862.453018770252
+    },
+    "MLT": {
+        "Country": "Malta",
+        "GDP": 14647384607.604,
+        "GDPPerCapita": 27884.6428274251
+    },
+    "MMR": {
+        "Country": "Myanmar",
+        "GDP": 79852046610.9676,
+        "GDPPerCapita": 1467.60428115143
+    },
+    "MNA": {
+        "Country": "Middle East & North Africa (excluding high income)",
+        "GDP": 1195745981528.4,
+        "GDPPerCapita": 3018.43365465049
+    },
+    "MNE": {
+        "Country": "Montenegro",
+        "GDP": 4769860740.74074,
+        "GDPPerCapita": 7677.15222569996
+    },
+    "MNG": {
+        "Country": "Mongolia",
+        "GDP": 13312981594.573,
+        "GDPPerCapita": 4060.95051770038
+    },
+    "MNP": {
+        "Country": "Northern Mariana Islands",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "MOZ": {
+        "Country": "Mozambique",
+        "GDP": 14019446610.1963,
+        "GDPPerCapita": 448.544280704982
+    },
+    "MRT": {
+        "Country": "Mauritania",
+        "GDP": 7913680231.1828,
+        "GDPPerCapita": 1701.99116304908
+    },
+    "MUS": {
+        "Country": "Mauritius",
+        "GDP": 10920606197.6928,
+        "GDPPerCapita": 8627.84315711981
+    },
+    "MWI": {
+        "Country": "Malawi",
+        "GDP": 12182348212.7073,
+        "GDPPerCapita": 636.820536833847
+    },
+    "MYS": {
+        "Country": "Malaysia",
+        "GDP": 337006066373.26,
+        "GDPPerCapita": 10412.3489834381
+    },
+    "NAC": {
+        "Country": "North America",
+        "GDP": 22605296107568.4,
+        "GDPPerCapita": 61502.0959453876
+    },
+    "NAM": {
+        "Country": "Namibia",
+        "GDP": 10619194505.3543,
+        "GDPPerCapita": 4179.27806560875
+    },
+    "NCL": {
+        "Country": "New Caledonia",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "NER": {
+        "Country": "Niger",
+        "GDP": 13741378450.136,
+        "GDPPerCapita": 567.669892261611
+    },
+    "NGA": {
+        "Country": "Nigeria",
+        "GDP": 432293776262.398,
+        "GDPPerCapita": 2097.09247289022
+    },
+    "NIC": {
+        "Country": "Nicaragua",
+        "GDP": 12621505382.6062,
+        "GDPPerCapita": 1905.26115155921
+    },
+    "NLD": {
+        "Country": "Netherlands",
+        "GDP": 913865395789.886,
+        "GDPPerCapita": 52397.1167129558
+    },
+    "NOR": {
+        "Country": "Norway",
+        "GDP": 362198318435.26,
+        "GDPPerCapita": 67329.6777910967
+    },
+    "NPL": {
+        "Country": "Nepal",
+        "GDP": 33657175561.329,
+        "GDPPerCapita": 1155.14285440358
+    },
+    "NRU": {
+        "Country": "Nauru",
+        "GDP": 114626625.553023,
+        "GDPPerCapita": 10580.2681883905
+    },
+    "NZL": {
+        "Country": "New Zealand",
+        "GDP": 210700848973.509,
+        "GDPPerCapita": 41441.4666667011
+    },
+    "OED": {
+        "Country": "OECD members",
+        "GDP": 52392675685741.2,
+        "GDPPerCapita": 38218.8723741986
+    },
+    "OMN": {
+        "Country": "Oman",
+        "GDP": 73971391417.4252,
+        "GDPPerCapita": 14485.3861157973
+    },
+    "OSS": {
+        "Country": "Other small states",
+        "GDP": 375853309054.965,
+        "GDPPerCapita": 11766.9737392939
+    },
+    "PAK": {
+        "Country": "Pakistan",
+        "GDP": 262610002938.509,
+        "GDPPerCapita": 1188.85975692162
+    },
+    "PAN": {
+        "Country": "Panama",
+        "GDP": 53977036995.1729,
+        "GDPPerCapita": 12509.8352901414
+    },
+    "PER": {
+        "Country": "Peru",
+        "GDP": 202014363787.233,
+        "GDPPerCapita": 6126.87453978867
+    },
+    "PHL": {
+        "Country": "Philippines",
+        "GDP": 361489325230.731,
+        "GDPPerCapita": 3298.82958569657
+    },
+    "PLW": {
+        "Country": "Palau",
+        "GDP": 257700000.0,
+        "GDPPerCapita": 14243.8646915764
+    },
+    "PNG": {
+        "Country": "Papua New Guinea",
+        "GDP": 24668899683.4299,
+        "GDPPerCapita": 2757.21752973696
+    },
+    "POL": {
+        "Country": "Poland",
+        "GDP": 596624355719.671,
+        "GDPPerCapita": 15720.994663556
+    },
+    "PRE": {
+        "Country": "Pre-demographic dividend",
+        "GDP": 1293147607836.51,
+        "GDPPerCapita": 1332.04921124593
+    },
+    "PRI": {
+        "Country": "Puerto Rico",
+        "GDP": 103138300000.0,
+        "GDPPerCapita": 32290.9211360931
+    },
+    "PRK": {
+        "Country": "Korea, Dem. People's Rep.",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "PRT": {
+        "Country": "Portugal",
+        "GDP": 228539245045.341,
+        "GDPPerCapita": 22176.2967116929
+    },
+    "PRY": {
+        "Country": "Paraguay",
+        "GDP": 35670301496.1061,
+        "GDPPerCapita": 5001.07276045191
+    },
+    "PSE": {
+        "Country": "West Bank and Gaza",
+        "GDP": 15561300000.0,
+        "GDPPerCapita": 3239.73110812657
+    },
+    "PSS": {
+        "Country": "Pacific island small states",
+        "GDP": 9530487871.90819,
+        "GDPPerCapita": 3768.54335734646
+    },
+    "PST": {
+        "Country": "Post-demographic dividend",
+        "GDP": 49594473170967.9,
+        "GDPPerCapita": 44475.1891667213
+    },
+    "PYF": {
+        "Country": "French Polynesia",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "QAT": {
+        "Country": "Qatar",
+        "GDP": 144411363345.27,
+        "GDPPerCapita": 50124.3859361728
+    },
+    "ROU": {
+        "Country": "Romania",
+        "GDP": 248715551366.635,
+        "GDPPerCapita": 12896.0886211622
+    },
+    "RUS": {
+        "Country": "Russian Federation",
+        "GDP": 1483497784867.6,
+        "GDPPerCapita": 10126.7217935297
+    },
+    "RWA": {
+        "Country": "Rwanda",
+        "GDP": 10333991455.5443,
+        "GDPPerCapita": 797.855520671748
+    },
+    "SAS": {
+        "Country": "South Asia",
+        "GDP": 3386420411905.1,
+        "GDPPerCapita": 1823.71291162955
+    },
+    "SAU": {
+        "Country": "Saudi Arabia",
+        "GDP": 700117873253.333,
+        "GDPPerCapita": 20110.3161924912
+    },
+    "SDN": {
+        "Country": "Sudan",
+        "GDP": 21329109521.8077,
+        "GDPPerCapita": 486.418816281925
+    },
+    "SEN": {
+        "Country": "Senegal",
+        "GDP": 24644234594.6566,
+        "GDPPerCapita": 1471.83096170711
+    },
+    "SGP": {
+        "Country": "Singapore",
+        "GDP": 339998477929.985,
+        "GDPPerCapita": 59797.7521801188
+    },
+    "SLB": {
+        "Country": "Solomon Islands",
+        "GDP": 1545888426.23031,
+        "GDPPerCapita": 2250.6011638607
+    },
+    "SLE": {
+        "Country": "Sierra Leone",
+        "GDP": 4063289449.58795,
+        "GDPPerCapita": 509.376593987322
+    },
+    "SLV": {
+        "Country": "El Salvador",
+        "GDP": 24638720000.0,
+        "GDPPerCapita": 3798.63652082321
+    },
+    "SMR": {
+        "Country": "San Marino",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "SOM": {
+        "Country": "Somalia",
+        "GDP": 6965285324.52207,
+        "GDPPerCapita": 438.255165584899
+    },
+    "SRB": {
+        "Country": "Serbia",
+        "GDP": 53335016425.4148,
+        "GDPPerCapita": 7720.51057195234
+    },
+    "SSA": {
+        "Country": "Sub-Saharan Africa (excluding high income)",
+        "GDP": 1704320048486.98,
+        "GDPPerCapita": 1500.34999742719
+    },
+    "SSD": {
+        "Country": "South Sudan",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "SSF": {
+        "Country": "Sub-Saharan Africa",
+        "GDP": 1705379934850.61,
+        "GDPPerCapita": 1501.15292114676
+    },
+    "SST": {
+        "Country": "Small states",
+        "GDP": 451423668844.166,
+        "GDPPerCapita": 10770.58977779
+    },
+    "STP": {
+        "Country": "Sao Tome and Principe",
+        "GDP": 472914469.91933,
+        "GDPPerCapita": 2157.84044569668
+    },
+    "SUR": {
+        "Country": "Suriname",
+        "GDP": 2884248048.49068,
+        "GDPPerCapita": 4916.60566637918
+    },
+    "SVK": {
+        "Country": "Slovak Republic",
+        "GDP": 105172564491.569,
+        "GDPPerCapita": 19266.5135736247
+    },
+    "SVN": {
+        "Country": "Slovenia",
+        "GDP": 53589609580.7099,
+        "GDPPerCapita": 25517.33066526
+    },
+    "SWE": {
+        "Country": "Sweden",
+        "GDP": 541220059459.25,
+        "GDPPerCapita": 52274.4087868798
+    },
+    "SWZ": {
+        "Country": "Eswatini",
+        "GDP": 3972728948.47088,
+        "GDPPerCapita": 3424.2822122311
+    },
+    "SXM": {
+        "Country": "Sint Maarten (Dutch part)",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "SYC": {
+        "Country": "Seychelles",
+        "GDP": 1059886363.63636,
+        "GDPPerCapita": 10764.4204224611
+    },
+    "SYR": {
+        "Country": "Syrian Arab Republic",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "TCA": {
+        "Country": "Turks and Caicos Islands",
+        "GDP": 924583000.0,
+        "GDPPerCapita": 23879.9266491038
+    },
+    "TCD": {
+        "Country": "Chad",
+        "GDP": 10829076801.729,
+        "GDPPerCapita": 659.270044977801
+    },
+    "TEA": {
+        "Country": "East Asia & Pacific (IDA & IBRD countries)",
+        "GDP": 17426659793626.2,
+        "GDPPerCapita": 8346.03881045794
+    },
+    "TEC": {
+        "Country": "Europe & Central Asia (IDA & IBRD countries)",
+        "GDP": 3876733319266.95,
+        "GDPPerCapita": 8387.39069310257
+    },
+    "TGO": {
+        "Country": "Togo",
+        "GDP": 7574636978.66173,
+        "GDPPerCapita": 914.950792453212
+    },
+    "THA": {
+        "Country": "Thailand",
+        "GDP": 501643653514.925,
+        "GDPPerCapita": 7186.87409206525
+    },
+    "TJK": {
+        "Country": "Tajikistan",
+        "GDP": 8194150301.78552,
+        "GDPPerCapita": 859.137961121368
+    },
+    "TKM": {
+        "Country": "Turkmenistan",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "TLA": {
+        "Country": "Latin America & the Caribbean (IDA & IBRD countries)",
+        "GDP": 4478206456171.96,
+        "GDPPerCapita": 7035.75307488449
+    },
+    "TLS": {
+        "Country": "Timor-Leste",
+        "GDP": 1902156800.0,
+        "GDPPerCapita": 1442.73073825015
+    },
+    "TMN": {
+        "Country": "Middle East & North Africa (IDA & IBRD countries)",
+        "GDP": 1180179221398.0,
+        "GDPPerCapita": 3015.70355079971
+    },
+    "TON": {
+        "Country": "Tonga",
+        "GDP": 488829964.070819,
+        "GDPPerCapita": 4624.82344882844
+    },
+    "TSA": {
+        "Country": "South Asia (IDA & IBRD)",
+        "GDP": 3386420411905.1,
+        "GDPPerCapita": 1823.71291162955
+    },
+    "TSS": {
+        "Country": "Sub-Saharan Africa (IDA & IBRD countries)",
+        "GDP": 1705379934850.61,
+        "GDPPerCapita": 1501.15292114676
+    },
+    "TTO": {
+        "Country": "Trinidad and Tobago",
+        "GDP": 21588037504.9992,
+        "GDPPerCapita": 15425.6351094785
+    },
+    "TUN": {
+        "Country": "Tunisia",
+        "GDP": 41620349986.3089,
+        "GDPPerCapita": 3521.59194808639
+    },
+    "TUR": {
+        "Country": "Turkey",
+        "GDP": 719954821683.31,
+        "GDPPerCapita": 8536.43331960632
+    },
+    "TUV": {
+        "Country": "Tuvalu",
+        "GDP": 48855550.2030142,
+        "GDPPerCapita": 4143.10975263011
+    },
+    "TZA": {
+        "Country": "Tanzania",
+        "GDP": 62409709110.9538,
+        "GDPPerCapita": 1076.46970642052
+    },
+    "UGA": {
+        "Country": "Uganda",
+        "GDP": 37600368180.9399,
+        "GDPPerCapita": 822.027681531666
+    },
+    "UKR": {
+        "Country": "Ukraine",
+        "GDP": 155498989149.587,
+        "GDPPerCapita": 3724.93843689756
+    },
+    "UMC": {
+        "Country": "Upper middle income",
+        "GDP": 23150665555175.7,
+        "GDPPerCapita": 9177.84043725712
+    },
+    "URY": {
+        "Country": "Uruguay",
+        "GDP": 53628827440.3582,
+        "GDPPerCapita": 15438.4116657291
+    },
+    "USA": {
+        "Country": "United States",
+        "GDP": 20953030000000.0,
+        "GDPPerCapita": 63593.4436209541
+    },
+    "UZB": {
+        "Country": "Uzbekistan",
+        "GDP": 59929951114.3598,
+        "GDPPerCapita": 1750.69711321291
+    },
+    "VCT": {
+        "Country": "St. Vincent and the Grenadines",
+        "GDP": 807474074.074074,
+        "GDPPerCapita": 7278.01629673695
+    },
+    "VEN": {
+        "Country": "Venezuela, RB",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "VGB": {
+        "Country": "British Virgin Islands",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "VIR": {
+        "Country": "Virgin Islands (U.S.)",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "VNM": {
+        "Country": "Vietnam",
+        "GDP": 271158442448.537,
+        "GDPPerCapita": 2785.72416087603
+    },
+    "VUT": {
+        "Country": "Vanuatu",
+        "GDP": 881547928.58381,
+        "GDPPerCapita": 2870.08930028914
+    },
+    "WLD": {
+        "Country": "World",
+        "GDP": 84746979120044.5,
+        "GDPPerCapita": 10918.7228343968
+    },
+    "WSM": {
+        "Country": "Samoa",
+        "GDP": 807100820.648132,
+        "GDPPerCapita": 4067.84345873762
+    },
+    "XKX": {
+        "Country": "Kosovo",
+        "GDP": 7716925356.12536,
+        "GDPPerCapita": 4346.63793069721
+    },
+    "YEM": {
+        "Country": "Yemen, Rep.",
+        "GDP": "-",
+        "GDPPerCapita": "-"
+    },
+    "ZAF": {
+        "Country": "South Africa",
+        "GDP": 335442101366.417,
+        "GDPPerCapita": 5655.86765390396
+    },
+    "ZMB": {
+        "Country": "Zambia",
+        "GDP": 18110631358.3114,
+        "GDPPerCapita": 985.132436038869
+    },
+    "ZWE": {
+        "Country": "Zimbabwe",
+        "GDP": 18051170798.941,
+        "GDPPerCapita": 1214.50982023534
+    }
+}

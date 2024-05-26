@@ -83,5 +83,41 @@ def process_data():
     with open("data-classic.json", "w") as f:
         json.dump(data, f, indent=4)
 
+
+def process_data2():
+    # load data from gdp.csv and gdp_per_capita.csv
+    data = {}
+    with open("./gdp.csv", "r") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            name = row["Country Name"]
+            code = row["Code"]
+            value = row["2020"]
+            try:
+                parsed = float(value)
+            except:
+                print(f"Could not parse {value}")
+                parsed = '-'
+
+            data[code] = {
+                "Country": name,
+                "GDP": parsed
+            }
+
+    with open("./gdp_per_capita.csv", "r") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            code = row["Code"]
+            value = row["2020"]
+            try:
+                parsed = float(value)
+            except:
+                print(f"Could not parse {value}")
+                parsed = '-'
+            data[code]["GDPPerCapita"] = parsed
+
+    with open("./gdp.json", "w") as f:
+        json.dump(data, f, indent=4)
+
 if __name__ == "__main__":
-    process_data()
+    process_data2()
