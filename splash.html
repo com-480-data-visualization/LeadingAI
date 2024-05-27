@@ -304,7 +304,7 @@
                     ">Scroll to start Data visualization</h1>
                 
 
-                <dotlottie-player class="m-4 place-self-center" src="https://lottie.host/400d3cf6-2e30-408d-9c4b-aa02a804d16c/rNHh19YNm8.json" background="transparent" speed="1" style="width: 40vw;" loop autoplay></dotlottie-player>
+                <dotlottie-player class="m-4 place-self-center" src="https://lottie.host/400d3cf6-2e30-408d-9c4b-aa02a804d16c/rNHh19YNm8.json" background="transparent" speed="1" style="width: 40vw; max-width: 800px;" loop autoplay></dotlottie-player>
             </div>
         
         </div>
@@ -346,6 +346,9 @@
     let wHeight = $(window).height();
     let wWidth = $(window).width();
     AOS.init();
+    let currentGraphScene = -1  ;
+    // list of graphs to be displayed
+    const graphScenes = [top15Chart, gdpBubbleChart]
 
     function initPage() {
         // if the controller is not null, destroy scenes
@@ -422,9 +425,8 @@
         let isPortrait = window.matchMedia("(orientation: portrait)").matches;
         console.log("Portrait:" + isPortrait);
 
-        // list of graphs to be displayed
-        const graphScenes = [top15Chart, gdpBubbleChart]
-        let currentGraphScene = -1  ;
+        
+        
 
         // add scene 2
         new ScrollMagic.Scene({
@@ -470,6 +472,20 @@
     $(window).resize(function() {
         if ($(window).width() != lastWidth || $(window).height() != lastHeight) {
             lastWidth, lastHeight = initPage();
+
+            wHeight = $(window).height();
+            wWidth = $(window).width();
+            graphWidth = wWidth;
+            graphHeight = wHeight;
+
+            // re-trigger the current graph scene if needed
+            if (currentGraphScene != null && currentGraphScene >= 0) {
+                let sceneFunc = graphScenes[currentGraphScene];
+                if (sceneFunc) {
+                    sceneFunc();
+                }
+            }
+
         } else {
             console.log("No resize needed");
             return;
@@ -794,18 +810,18 @@
             .selectAll("g")
             .data(clr.domain())
             .join("g")
-            .attr("transform", (d, i) => `translate(${i * (wWidth / clr.domain().length)}, 0)`);
+            .attr("transform", (d, i) => `translate(${i * (wWidth / clr.domain().length)}, -20)`);
 
             legend.append("rect")
                 .attr("x", 0)
                 .attr("width", (wWidth / clr.domain().length))
-                .attr("height", 20)
+                .attr("height", 40)
                 .attr("fill", clr)
                 .attr("fill-opacity", 0.6);
 
             legend.append("text")
                 .attr("x", (wWidth / clr.domain().length / 2))
-                .attr("y", 10)
+                .attr("y", 20)
                 .attr("dy", "0.35em")
                 .text(d => d)
                 .attr("fill", "black")
@@ -969,7 +985,8 @@
             });
         
 
-        const labelXOffset = wWidth / 5;
+        const labelXOffset = Math.min(wWidth / 5, 600);
+        const labelYOffset = wHeight / 20;
 
         // Add a rounded menu box on the top right to select different size variables
         svg.append("g")
@@ -979,10 +996,10 @@
             // add a text node to the menu box
             .append("text")
             .attr("x", graphWidth - labelXOffset - graphMargin.right - 30)
-            .attr("y", titleMargin + 30)
+            .attr("y", titleMargin + 60)
             .text("View by GDP")
             .attr("fill", "black")
-            .attr("font-size", "2vw")
+            .attr("font-size", "1.5vw")
             .attr("font-family", "Rubik Mono One")
             .attr("font-weight", "400")
             .attr("cursor", "pointer")
@@ -1014,10 +1031,10 @@
             // add a text node to the menu box
             .append("text")
             .attr("x", graphWidth - labelXOffset - graphMargin.right - 30)
-            .attr("y", titleMargin + 30 + 40)
+            .attr("y", titleMargin + 60 + labelYOffset)
             .text("View Government Strategy")
             .attr("fill", "black")
-            .attr("font-size", "2vw")
+            .attr("font-size", "1.5vw")
             .attr("font-family", "Rubik Mono One")
             .attr("font-weight", "400")
             .attr("cursor", "pointer")
