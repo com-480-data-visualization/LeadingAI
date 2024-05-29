@@ -1,0 +1,938 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leading AI - Interactive Map</title>
+    <link href="./static/tailwind.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+     <script src="
+        https://cdn.jsdelivr.net/npm/flag-icon-css@4.1.7/svgo.config.min.js
+        "></script>
+        <link href="
+        https://cdn.jsdelivr.net/npm/flag-icon-css@4.1.7/css/flag-icons.min.css
+        " rel="stylesheet">
+
+     <script src="./static/iso-3-to-iso-2.js"></script>
+
+
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-providers@latest/leaflet-providers.js"></script>
+
+    <script type="module">
+        import countryFlagIcons from 'https://cdn.jsdelivr.net/npm/country-flag-icons@1.5.11/+esm'
+    </script>
+   </head>
+
+<style>
+    /* remove body margins */
+    html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* animate the appearance by transitioning opacity to 1 and zooming out */
+    .animate-enter {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    .animate-enter-active {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 300ms, transform 300ms;
+    }
+
+    .animate-exit {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .animate-exit-active {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 300ms, transform 300ms;
+    }
+
+    .indicator1 {
+        background-color: #e87c6b;
+        border-color: #83443a;
+    
+    }
+
+    .indicator2 {
+        background-color: #ffcc75;
+        border-color: #997943;
+    
+    }
+
+    .indicator3 {
+        background-color: #75f075;
+        border-color: #4c9f4c;
+    
+    }
+
+    .indicator4 {
+        background-color: #59eac8;
+        border-color: #4da08d;
+    
+    }
+
+    .indicator5 {
+        background-color: #79ccfc;
+        border-color: #518daf;
+    
+    }
+
+    .indicator6 {
+        background-color: #e6a0ff;
+        border-color: #7e548d;
+    
+    }
+
+    .indicator7 {
+        background-color: hsl(345, 100%, 77%);
+        border-color: hsl(345, 32%, 53%);
+    
+    }
+
+</style>
+
+
+<!-- Create an element where the map will take place -->
+ <!-- Gray navbar containing a button to open the filter on the left, the title in the center and an icon on the right -->
+ <header class="fixed top-0 w-full z-[1000]">
+    <nav class="bg-cream-dark p-4 flex justify-between items-center rounded-lg m-4 text-cream-background">
+        <button id="sidebarOpen" class="" onclick="toggleFilterNavBar()">
+        <i class="bi bi-ui-radios text-2xl block md:hidden"></i> <span class="hidden md:block text-2xl font-bold ">Select Indicators</span>
+        </button>
+        <button id="sidebarClose" class="hidden" onclick="toggleFilterNavBar()">
+        <i class="bi bi-x-lg text-2xl"></i>
+        </button>
+        <h1 class="text-xl font-bold">Interactive Data Map</h1>
+        <button class="" onclick="window.open('/')">
+            <i class="bi bi-question-circle text-2xl"></i>
+        </button>
+    </nav>
+
+</header>
+
+<div class="fixed left-0 bg-cream p-4 rounded-lg m-4 text-cream-background z-[2000] animate-enter hidden" id="filterNavBar" style="
+    top: 10%;
+    max-height: 60%;
+    overflow: hidden;
+    ">
+    <h3 class="text-md md:text-2xl font-bold">Indicators</h3>
+     <ul class="list-inside mt-4 text-sm md:mt-8 md:text-md" id="indicatorSelectionList">
+        <li class="my-4 md:my-8 leading-loose cursor-pointer" data-aos="zoom-out-left"><span onclick="indicator.set('selected', 'TotalScore')" class="rounded-lg p-1 border-4 bg-cream-dark">Index Score</span> </li>
+        <li class="my-4 md:my-8 leading-loose cursor-pointer" data-aos="zoom-out-left"><span onclick="indicator.set('selected', 'Talent')" class="rounded-lg p-1 border-4 indicator1">Talent</span> </li>
+        <li class="my-4 md:my-8 leading-loose cursor-pointer" data-aos="zoom-out-left"><span onclick="indicator.set('selected', 'Infrastructure')" class="rounded-lg p-1 border-4 indicator2">Infrastructure</span> </li>
+        <li class="my-4 md:my-8 leading-loose cursor-pointer" data-aos="zoom-out-left"><span onclick="indicator.set('selected', 'OperatingEnvironment')" class="rounded-lg p-1 border-4 indicator3">Operating Environment</span> </li>
+        <li class="my-4 md:my-8 leading-loose cursor-pointer" data-aos="zoom-out-left"><span onclick="indicator.set('selected', 'Research')" class="rounded-lg p-1 border-4 indicator4">Research</span> </li>
+        <li class="my-4 md:my-8 leading-loose cursor-pointer" data-aos="zoom-out-left"><span onclick="indicator.set('selected', 'Development')" class="rounded-lg p-1 border-4 indicator5">Development</span> </li>
+        <li class="my-4 md:my-8 leading-loose cursor-pointer" data-aos="zoom-out-left"><span onclick="indicator.set('selected', 'GovernmentStrategy')" class="rounded-lg p-1 border-4 indicator6">Government Strategy</span> </li>
+        <li class="my-4 md:my-8 leading-loose cursor-pointer" data-aos="zoom-out-left"><span onclick="indicator.set('selected', 'Commercial')" class="rounded-lg p-1 border-4 indicator7">Commercial</span> </li>
+    </ul>
+</div>
+
+
+<body class="bg-cream-background h-full z-0">
+
+    
+   
+    
+  
+  <script>
+      // Scripts to control the state of the application
+  
+  
+      // State management
+    class State {
+        constructor() {
+              this.state = {};
+              this.callbacks = {};
+          }
+  
+        set(key, value) {
+            this.state[key] = value;
+            if (this.callbacks[key]) {
+                this.callbacks[key](value);
+            }
+        }
+  
+        get(key) {
+              return this.state[key];
+          }
+
+        registerCallback(key, callback) {
+            this.callbacks[key] = callback;
+          }
+      }
+  
+      const filterNavBar = new State();
+      const openButton = document.getElementById('sidebarOpen');
+      const closeButton = document.getElementById('sidebarClose');
+      const sideBar = document.getElementById('filterNavBar');
+      filterNavBar.set('open', false);
+  
+      function toggleFilterNavBar() {
+          console.log('Toggling filter nav bar');
+          if (filterNavBar.get('open')) {
+                filterNavBar.set('open', false);
+                // hide the open button and show the close button
+                openButton.classList.remove('hidden');
+                closeButton.classList.add('hidden');
+                //sideBar.classList.add('hidden');
+                sideBar.classList.remove('animate-enter-active');
+                sideBar.classList.add('animate-exit-active');
+                // wait 800ms then hide the list
+                setTimeout(() => {
+                    sideBar.classList.add('hidden');
+                }, 80);
+
+
+
+          } else {
+                filterNavBar.set('open', true);
+                // hide the open button and show the close button
+                openButton.classList.add('hidden');
+                closeButton.classList.remove('hidden');
+                sideBar.classList.remove('hidden');
+                sideBar.classList.add('animate-enter-active');
+                sideBar.classList.remove('animate-exit-active');
+          }
+      }
+  </script>
+  
+
+
+    <div id="map" class="flex w-full h-full bg-red-800 z-0" style="height: 100vh;"></div>
+    
+    </div>
+
+    <div id="informationBubble" class="rounded-lg absolute w-25 right-5 p-4 shadow-md z-[998] hidden pointer-events-none bg-cream-dark overflow-auto" style="top:8%; max-height: 91%;">
+        <h1 class="text-lg font-bold bg-cream-darkest rounded-lg p-3 mb-3 flex justify-between items-center">
+            
+            <span id="infoSelectedCountry">Please select a country</span>
+
+            <span class="p-2 bg-cream-darkest cursor-pointer text-cream rounded ms-2" onclick="{
+                document.getElementById('informationBubble').classList.add('hidden', 'pointer-events-none');
+                document.getElementById('gaussianDisplay').classList.add('hidden');
+                pinnedCountry.set('pinned', false);
+                pinnedCountry.set('country', null);
+            }"><i class="me-2 bi bi-x-circle-fill"></i></span>
+        </h1>
+        <p class="font-bold text-sm">Ranking: <span id="rankSelectedCountry">N/A</span></p>
+        
+        <i id="miscInfoCountry" class="">Click on a country to see more information</i>
+        <div id="gaussianDisplay" class="rounded-md pointer-events-none  bottom-0 width-full z-[1000] p-4 hidden" style="height: 30vh; width: 80vw; max-width: 800px; background-color: rgba(30, 30, 30, 0.5);"></div>
+    </div>
+</body>
+</html>
+
+<script>
+let map = L.map('map').setView([51.505, -0.09], 3);
+
+let indicator = new State();
+let pinnedCountry = new State();
+pinnedCountry.set('country', null);
+pinnedCountry.set('pinned', false);
+
+// restrict the map to the bounds of the world
+map.setMaxBounds([[-90, -180], [90, 180]]);
+map.on('drag', function() {
+    map.panInsideBounds([[90, 180], [-90, -180]], { animate: false });
+});
+
+// set the min and max zoom levels
+map.options.maxZoom = 5;
+map.options.minZoom = 2;
+
+// make sure that resizing the window doesn't break the map
+map.on('resize', function() {
+    map.panInsideBounds([[90, 180], [-90, -180]], { animate: false });
+    map.invalidateSize();
+});
+
+// remove the weird zoom control
+map.removeControl(map.zoomControl);
+
+// set the map background to dark gray
+document.getElementById('map').style.backgroundColor = '#131211';
+
+let rawData;
+let geojsonRef;
+
+
+// Define the gradient colors
+const graphGradientMap = {
+    'TotalScore': ['#d95043', '#cea388', '#bad6a9', '#aff4a0', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66'],
+    'Talent': ['#d95043', '#cea388', '#bad6a9', '#aff4a0', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66'],
+    'Infrastructure': ['#d95043', '#cea388', '#bad6a9', '#b6ff66'],
+    'OperatingEnvironment': ['#d95043', '#cea388', '#bad6a9', '#b6ff66'],
+    'Research': ['#d95043', '#cea388', '#bad6a9', '#aff4a0', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66'],
+    'Development': ['#d95043', '#cea388', '#bad6a9', '#aff4a0', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66'],
+    'GovernmentStrategy': ['#d95043', '#cea388', '#bad6a9', '#b6ff66'],
+    'Commercial': ['#d95043', '#cea388', '#bad6a9', '#aff4a0', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66', '#b6ff66']
+
+};
+
+const scoreFunctions = {
+    'TotalScore': (d) => d.TotalScore,
+    'Talent': (d) => d.Talent,
+    'Infrastructure': (d) => d.Infrastructure,
+    'OperatingEnvironment': (d) => d.OperatingEnvironment,
+    'Research': (d) => d.Research,
+    'Development': (d) => d.Development,
+    'GovernmentStrategy': (d) => d.GovernmentStrategy,
+    'Commercial': (d) => d.Commercial
+};
+
+const indicatorLabels = {
+    'TotalScore': 'Index Score',
+    'Talent': 'Talent',
+    'Infrastructure': 'Infrastructure',
+    'OperatingEnvironment': 'Operating Environment',
+    'Research': 'Research',
+    'Development': 'Development',
+    'GovernmentStrategy': 'Government Strategy',
+    'Commercial': 'Commercial',
+
+    // also add the labels for the other indicators which are not scores
+    'PoliticalRegime': 'Political Regime',
+    'Region': 'Region',
+
+};
+
+//Entry point: download the data and start the application
+d3.json('/static/data-classic.json').then(function(data) {
+    rawData = data;
+
+    // Proceed to the next step
+    InitStep2();
+});
+
+/*
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 4,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+});//.addTo(map);
+*/
+
+const InitStep2 = () => {
+
+// Load the country outlines
+
+    d3.json('/static/countries.geo.json').then(function(data) {
+
+        const color = colorGradientFactory(0, 100, graphGradientMap['TotalScore']);
+        
+        function style(feature) {
+            // check if the feature is in the data
+            if (rawData[feature.id]) {
+                // return a gradient color based on total score (max 100)
+                // color scheme: #00429d,#73a2c6,#ffffe0
+
+                const score = rawData[feature.id].TotalScore;
+                return {
+                    fillColor: color(score),
+                    weight: 3,
+                    opacity: 0.4,
+                    color: '#333',
+                    fillOpacity: 1
+                };
+            }
+
+            return {
+                fillColor: "#F0EAD1",
+                weight: 1.5,
+                opacity: 0.6,
+
+                // dark gray
+                color: '#333',
+                fillOpacity: 0.3
+            };
+        }
+
+        geojsonRef = L.geoJson(data, {
+            onEachFeature: onEachFeature,
+            style : style
+        }).addTo(map);
+
+        function onEachFeature(feature, layer){
+            layer.on({
+                click : onCountryClick,
+                mouseover : onCountryHighLight,
+                mouseout : onCountryMouseOut
+            });
+        }
+
+
+        addColourScale(color);
+
+
+        
+    }); // end of 'then'
+
+
+
+}
+
+function addColourScale(color) {
+    // create a legend
+    const legend = L.control({position: 'bottomright'});
+        legend.onAdd = function(map) {
+            const div = L.DomUtil.create('div', 'info legend');
+            const grades = [0, 20, 40, 60, 80, 100];
+            const labels = [];
+
+            // show a vertical solid gradient bar with the color scale and labels on the side
+            div.classList.add('bg-cream', 'p-4', 'rounded-lg', 'shadow-md', 'z-[1000]');
+            div.style.width = '100px';
+            div.style.height = '200px';
+
+            // add the title
+            div.innerHTML += '<h4 style="font-size:15px" >Scale</h4>';
+
+            // add a rectangle spanning 20% of the height and define a css style with the gradient
+            let innerhtmlRect = `<div style="height: 150px; width: 15px; position:absolute; top: 20%; left: 15px; background: linear-gradient(to bottom`;
+            for (let i = 0; i < 6; i++) {
+                innerhtmlRect += `, ${color(grades[i])} ${100/6 * i}%`;
+            }
+            innerhtmlRect += `);"></div>`;
+            div.innerHTML += innerhtmlRect;
+
+            let labelsHtml = '<div style="position:absolute; top: 20%; left: 30px;">';
+
+            // add the labels
+            for (let i = 0; i < grades.length; i++) {
+                labelsHtml += `<p style="font-size: 10px; margin-bottom: 12px; padding: 0;">-  ${grades[i]}</p>`;
+            }
+            labelsHtml += '</div>';
+            div.innerHTML += labelsHtml;
+
+            // add the label "Index Score" rotated by -90 degrees
+            div.innerHTML += '<p style="position:absolute; top: 100px; right: -25px; transform: rotate(-90deg); font-size: 15px; width:100%">Index Score</p>';
+
+            return div;
+        };
+
+        legend.addTo(map);
+}
+
+
+indicator.set('selected', 'TotalScore');
+indicator.set('scoreFunction', scoreFunctions['TotalScore']);
+
+// register the callback for the indicator
+indicator.registerCallback('selected', function(value) {
+    indicator.set('scoreFunction', scoreFunctions[value]);
+    console.log('Indicator changed to ' + value);
+    // update the color gradient
+    const color = colorGradientFactory(0, 100, graphGradientMap[value]);
+    // update the style of the geojson
+    geojsonRef.setStyle(function(feature) {
+        // check if the feature is in the data
+        if (rawData[feature.id]) {
+            // return a gradient color based on total score (max 100)
+            // color scheme: #00429d,#73a2c6,#ffffe0
+
+            const score = rawData[feature.id][value];
+            return {
+                fillColor: color(score),
+                weight: 3,
+                opacity: 0.4,
+                color: '#333',
+                fillOpacity: 1
+            };
+        }
+
+        return {
+            fillColor: "#F0EAD1",
+            weight: 1.5,
+            opacity: 0.6,
+
+            // dark gray
+            color: '#333',
+            fillOpacity: 0.3
+        };
+    });
+
+    // update the color scale
+    document.querySelector('.legend').remove();
+    addColourScale(color);
+
+    // check if there is a pinned country
+    if (pinnedCountry.get('pinned')) {
+        // get the data for the country
+        let countryData = rawData[pinnedCountry.get('country')];
+        console.log(countryData);
+
+        // simulate a click on the country
+        onCountryClick(pinnedCountry.get('element'));
+    } else if (pinnedCountry.get('lastHighlighted') && !document.getElementById('informationBubble').classList.contains('hidden') ){
+        // show the information bubble
+        document.getElementById('informationBubble').classList.add('hidden', 'pointer-events-none');
+        onCountryHighLight(pinnedCountry.get('lastHighlighted'));
+    }
+
+});
+
+
+/*
+Behaviours
+*/
+
+pinnedCountry.registerCallback('pinned', function(value) {
+    console.log('Pinned country changed to ' + value);
+});
+
+function onCountryClick(e){
+    console.log(e.target.feature.id);
+
+    pinnedCountry.set('pinned', true);
+    pinnedCountry.set('country', e.target.feature.id);
+    pinnedCountry.set('element', e);
+    console.log('Pinned country: ', pinnedCountry.get('country'));
+
+    // if the country is not in the data, remove graph and return
+    if (!rawData[e.target.feature.id]) {
+        removeGraph();
+        document.getElementById('gaussianDisplay').classList.add('hidden');
+
+        onCountryHighLight(e);
+
+        return;
+    }
+
+    onCountryHighLight(e);
+
+    // get the data for the country
+    let countryData = rawData[e.target.feature.id];
+    console.log(countryData);
+
+    document.getElementById('gaussianDisplay').classList.remove('hidden');
+    // show the graph
+    showGraph(countryData, colorGradientFactory(0, 100, graphGradientMap[indicator.get('selected')]));
+
+    // pin the country
+
+
+    
+
+
+    
+}
+
+function onCountryHighLight(e){
+
+    const selectedIndicator = indicator.get('selected');
+
+    
+
+    const miscInfo = document.getElementById('miscInfoCountry');
+
+    // Check whether the user is on a smartphone
+    if(window.matchMedia("(pointer: coarse)").matches && rawData[e.target.feature.id]) {
+        pinnedCountry.set('pinned', true);
+        pinnedCountry.set('country', e.target.feature.id);
+        pinnedCountry.set('element', e);
+        console.log('Pinned country: ', pinnedCountry.get('country'));
+        // get the data for the country
+        let countryData = rawData[e.target.feature.id];
+        console.log(countryData);
+
+        document.getElementById('gaussianDisplay').classList.remove('hidden');
+        // show the bubble after 100ms to prevent double click event on touch screen
+        setTimeout(() => {
+            document.getElementById('informationBubble').classList.remove('hidden', 'pointer-events-none');
+            showGraph(countryData, colorGradientFactory(0, 100, graphGradientMap[indicator.get('selected')]));
+        }, 100);
+
+        
+
+
+    } else {
+        document.getElementById('informationBubble').classList.remove('hidden', 'pointer-events-none');
+        
+    }
+    pinnedCountry.set('lastHighlighted', e);
+
+    var layer = e.target;
+    layer.setStyle({
+        weight: 4,
+        // dark gray
+        color: '#333',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+
+    if (pinnedCountry.get('pinned') && pinnedCountry.get('country') !== e.target.feature.id){
+        return;
+    }
+
+    
+
+    if (!rawData[e.target.feature.id]) {
+        // show the information bubble
+        console.log(getCountryISO2(e.target.feature.id).toLowerCase(), e.target.feature.id);
+        document.getElementById('infoSelectedCountry').innerHTML = `<span class="mr-3 flag-icon flag-icon-${getCountryISO2(e.target.feature.id).toLowerCase()}"></span>` + e.target.feature.properties.name;
+        document.getElementById('rankSelectedCountry').innerText = `N/A`;
+        miscInfo.innerText = 'This country is not part of the dataset.';
+        return;
+    } else {
+        var countryData = rawData[e.target.feature.id];
+        const scoreFunction = indicator.get('scoreFunction');
+        // show the information bubble
+        document.getElementById('infoSelectedCountry').innerHTML = `<span class="mr-3 flag-icon flag-icon-${getCountryISO2(e.target.feature.id).toLowerCase()}"></span>` + e.target.feature.properties.name;
+
+        // Calculate the ranking of the country
+        let rank = 1;
+        for (let key in rawData) {
+            if (scoreFunction(rawData[key]) > scoreFunction(rawData[e.target.feature.id])) {
+                rank++;
+            }
+        }
+        document.getElementById('rankSelectedCountry').innerText = `${rank} / ${Object.keys(rawData).length}`;
+        miscInfo.innerText = "";
+        miscInfo.innerHTML = generateMiscInfo(countryData);
+
+        
+    }
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+}
+
+function getRankingsForAllCategories(countryData) {
+    let rankings = {};
+    for (let key in scoreFunctions) {
+        let rank = 1;
+        for (let key2 in rawData) {
+            if (scoreFunctions[key](rawData[key2]) > scoreFunctions[key](countryData)) {
+                rank++;
+            }
+        }
+        rankings[key] = rank;
+    }
+    return rankings;
+}
+
+function generateMiscInfo(countryData) {
+    // For each indicator, show the value
+    let miscInfo = '<h3 class="font-bold mt-3">Indicator Values</h3>';
+
+    miscInfo += '<ul class="list-inside text-sm md:text-md">';
+
+    let rankings = getRankingsForAllCategories(countryData);
+    const numOfCountries = Object.keys(rawData).length;
+
+    // for each indicator, if the ranking is above 15, show it in green and bold with an icon. If it is in the last 15, show it in red and bold with an icon
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-between rounded-lg ${indicator.get('selected') === 'TotalScore' ? 'bg-cream-darkest' : ''}">
+        <span class="${ rankings['TotalScore'] <= 15 ? 'bg-green-500' : ''} ${rankings['TotalScore'] > numOfCountries - 15 ? 'bg-red-500' : ''} rounded-md p-1 font-bold mr-3">Rank ${rankings['TotalScore']}</span>
+        <span class="rounded-lg p-1 border-4 bg-cream-background text-cream cursor-pointer" onclick='indicator.set("selected", "TotalScore")'><strong>Index Score:</strong> ${countryData.TotalScore}</span> </li>`;
+
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-between rounded-lg ${indicator.get('selected') === 'Talent' ? 'bg-cream-darkest' : ''}">
+        <span class="${ rankings['Talent'] <= 15 ? 'bg-green-500' : ''} ${rankings['Talent'] > numOfCountries - 15 ? 'bg-red-500' : ''} rounded-md p-1 font-bold mr-3">Rank ${rankings['Talent']}</span>
+        <span class="rounded-lg p-1 border-4 indicator1 cursor-pointer" onclick='indicator.set("selected", "Talent")'><strong>Talent:</strong> ${countryData.Talent}</span> </li>`;
+
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-between rounded-lg ${indicator.get('selected') === 'Infrastructure' ? 'bg-cream-darkest' : ''}">
+        <span class="${ rankings['Infrastructure'] <= 15 ? 'bg-green-500' : ''} ${rankings['Infrastructure'] > numOfCountries - 15 ? 'bg-red-500' : ''} rounded-md p-1 font-bold mr-3">Rank ${rankings['Infrastructure']}</span>
+        <span class="rounded-lg p-1 border-4 indicator2 cursor-pointer" onclick='indicator.set("selected", "Infrastructure")'><strong>Infrastructure:</strong> ${countryData.Infrastructure}</span> </li>`;
+
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-between rounded-lg ${indicator.get('selected') === 'OperatingEnvironment' ? 'bg-cream-darkest' : ''}">
+        <span class="${ rankings['OperatingEnvironment'] <= 15 ? 'bg-green-500' : ''} ${rankings['OperatingEnvironment'] > numOfCountries - 15 ? 'bg-red-500' : ''} rounded-md p-1 font-bold mr-3">Rank ${rankings['OperatingEnvironment']}</span>
+        <span class="rounded-lg p-1 border-4 indicator3 cursor-pointer" onclick='indicator.set("selected", "OperatingEnvironment")'><strong>Operating Environment:</strong> ${countryData.OperatingEnvironment}</span> </li>`;
+
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-between rounded-lg ${indicator.get('selected') === 'Research' ? 'bg-cream-darkest' : ''}">
+        <span class="${ rankings['Research'] <= 15 ? 'bg-green-500' : ''} ${rankings['Research'] > numOfCountries - 15 ? 'bg-red-500' : ''} rounded-md p-1 font-bold mr-3">Rank ${rankings['Research']}</span>
+        <span class="rounded-lg p-1 border-4 indicator4 cursor-pointer" onclick='indicator.set("selected", "Research")'><strong>Research:</strong> ${countryData.Research}</span> </li>`;
+
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-between rounded-lg ${indicator.get('selected') === 'Development' ? 'bg-cream-darkest' : ''}">
+        <span class="${ rankings['Development'] <= 15 ? 'bg-green-500' : ''} ${rankings['Development'] > numOfCountries - 15 ? 'bg-red-500' : ''} rounded-md p-1 font-bold mr-3">Rank ${rankings['Development']}</span>
+        <span class="rounded-lg p-1 border-4 indicator5 cursor-pointer" onclick='indicator.set("selected", "Development")'><strong>Development:</strong> ${countryData.Development}</span> </li>`;
+
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-between rounded-lg ${indicator.get('selected') === 'GovernmentStrategy' ? 'bg-cream-darkest' : ''}">
+        <span class="${ rankings['GovernmentStrategy'] <= 15 ? 'bg-green-500' : ''} ${rankings['GovernmentStrategy'] > numOfCountries - 15 ? 'bg-red-500' : ''} rounded-md p-1 font-bold mr-3">Rank ${rankings['GovernmentStrategy']}</span>
+        <span class="rounded-lg p-1 border-4 indicator6 cursor-pointer" onclick='indicator.set("selected", "GovernmentStrategy")'><strong>Government Strategy:</strong> ${countryData.GovernmentStrategy}</span> </li>`;
+
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-between rounded-lg ${indicator.get('selected') === 'Commercial' ? 'bg-cream-darkest' : ''}">
+        <span class="${ rankings['Commercial'] <= 15 ? 'bg-green-500' : ''} ${rankings['Commercial'] > numOfCountries - 15 ? 'bg-red-500' : ''} rounded-md p-1 font-bold mr-3">Rank ${rankings['Commercial']}</span>
+        <span class="rounded-lg p-1 border-4 indicator7 cursor-pointer" onclick='indicator.set("selected", "Commercial")'><strong>Commercial:</strong> ${countryData.Commercial}</span> </li>`;
+
+    // also add the political regime and region
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-end">
+        <span class="rounded-lg p-1 border-4 bg-cream-dark"><strong>Political Regime:</strong> ${countryData.PoliticalRegime}</span> </li>`;
+
+    miscInfo += `<li class="my-2 md:my-4 leading-loose flex justify-end">
+        <span class="rounded-lg p-1 border-4 bg-cream-dark"><strong>Region:</strong> ${countryData.Region}</span> </li>`;
+
+
+
+
+
+
+    miscInfo += '</ul>';
+    
+    
+
+    return miscInfo;
+}
+
+function onCountryMouseOut(e){
+    // reset to the correct colour depending on the data and the selected indicator
+    let color = colorGradientFactory(0, 100, graphGradientMap[indicator.get('selected')]);  
+    let feature = e.target.feature;
+
+    
+
+    if (rawData[feature.id]) {
+        e.target.setStyle({
+            fillColor: color(rawData[feature.id][indicator.get('selected')]),
+            weight: 3,
+            opacity: 0.4,
+            color: '#333',
+            fillOpacity: 1
+        });
+    } else {
+        e.target.setStyle({
+            fillColor: "#F0EAD1",
+            weight: 1.5,
+            opacity: 0.6,
+            color: '#333',
+            fillOpacity: 0.3
+        });
+    }
+
+    console.log('Mouse out: ' + pinnedCountry.get('country'));
+
+    if (pinnedCountry.get('pinned') || pinnedCountry.get('previouslyHidden') === e.target.feature.id){
+        return;
+    }
+
+    document.getElementById('informationBubble').classList.add('hidden', 'pointer-events-none');
+    pinnedCountry.set('previouslyHidden', e.target.feature.id);
+}
+
+
+
+
+
+/*
+HELPER FUNCTIONS
+*/
+
+
+function colorGradientFactory(min, max, colorsList) {
+    // interpolate between colors uniformly 
+    const scale = d3.scaleLinear().domain([0, 100]).range([0, colorsList.length - 1]);
+    
+    // Red channel values
+    const red = d3.scaleLinear().domain(d3.range(colorsList.length)).range(colorsList.map(d => parseInt(d.slice(1, 3), 16)));
+    // Green channel values
+    const green = d3.scaleLinear().domain(d3.range(colorsList.length)).range(colorsList.map(d => parseInt(d.slice(3, 5), 16)));
+    // Blue channel values
+    const blue = d3.scaleLinear().domain(d3.range(colorsList.length)).range(colorsList.map(d => parseInt(d.slice(5, 7), 16)));
+
+    return function(value) {
+        const index = scale(value);
+        const lower = Math.floor(index);
+        const upper = Math.ceil(index);
+        const fraction = index - lower;
+        const r = red(lower) * (1 - fraction) + red(upper) * fraction;
+        const g = green(lower) * (1 - fraction) + green(upper) * fraction;
+        const b = blue(lower) * (1 - fraction) + blue(upper) * fraction;
+        return `rgb(${r}, ${g}, ${b})`;
+    };
+}
+
+
+
+
+
+
+
+// canvas gaussian test
+function sampleData(){
+    // sample a random mean and standard deviation
+    const mean = Math.random() * 100;
+    const std = Math.random() * 10;
+
+    // sample 200 random values out of a normal distribution
+    const data = d3.range(200).map(d3.randomNormal(mean, std));
+    
+    // normalize the data so that values lie in between 0 and 100
+    const min = d3.min(data);
+    const max = d3.max(data);
+    const scale = d3.scaleLinear().domain([min, max]).range([0, 100]);
+    return data.map(d => scale(d));
+}
+
+let data = sampleData();
+
+function removeGraph() {
+    d3.select('#gaussianDisplay').selectAll('svg').remove();
+}
+
+function showGraph(focusedFeature, gradientFunction) {
+
+    const scoreFunction = indicator.get('scoreFunction');
+
+    let data = Object.keys(rawData).map(d => scoreFunction(rawData[d]));
+
+    console.log("Showing graph for feature ", focusedFeature)
+    // Use D3.js to perform KDE on the data and show a smooth curve
+    // KDE
+    function kde(kernel, thresholds, data) {
+        return thresholds.map(t => [t, d3.mean(data, d => kernel(t - d))]);
+    }
+    function epanechnikov(bandwidth) {
+        return x => Math.abs(x /= bandwidth) <= 1 ? 0.75 * (1 - x * x) / bandwidth : 0;
+    }
+
+    removeGraph();
+    // Replace the canvas with the svg
+    const svg = d3.select('#gaussianDisplay').append('svg').attr('width', '100%').attr('height', '100%');
+    
+    // perform KDE
+    const thresholds = d3.range(0, 105, 1);
+    const kernel = epanechnikov(10);
+    const kdeData = kde(kernel, thresholds, data);
+    let dataMax = d3.max(kdeData, d => d[1]);
+
+    
+
+    // get the width and height of the svg in pixels
+    const width = svg.style('width').slice(0, -2);
+    const height = svg.style('height').slice(0, -2);
+    console.log(width, height);
+
+    const graphicsHeight = height * 0.7;
+    const titleHeight = height * 0.15;
+    const labelsHeight = height * 0.15;
+
+    // create scales for the x and y axis based on the data
+    const x = d3.scaleLinear().domain([0, 100]).range([20, width-20]);
+    const y = d3.scaleLinear().domain([0, dataMax]).range([height - 20, titleHeight + labelsHeight + 20]);
+
+    // create a line generator that will draw the line scaled to the svg with padding
+    const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveBasis);
+
+    const makePrediction = (x) => {
+        // map an arbitrary x value to the y value
+
+        // clamp the x value to the domain of the data
+        x = Math.max(0, Math.min(100, x));
+
+        // find the closest data point to the x value
+        const closest = kdeData.reduce((acc, d) => {
+            if (Math.abs(d[0] - x) < Math.abs(acc[0] - x)) {
+                return d;
+            }
+            return acc;
+        }, kdeData[0]);
+
+        return y(closest[1]);
+    };
+    
+    // draw the line
+    svg.append('path').datum(kdeData).attr('d', line).attr('fill', 'none').attr('stroke', '#bbb').attr('stroke-width', 0)
+    // animate the line
+    .transition().duration(300).attr('stroke-width', 3);
+
+
+    // draw the data points, scaled to the size of the svg
+
+    svg.append('g').datum(data).selectAll('circle').data(d => d).enter().append('circle').attr('r', 5).attr('fill', d => gradientFunction(d))
+    // initial position is set to 0,0
+    .attr('cx', 20).attr('cy', height - 20)
+    // animate the position of the data points
+    .transition().duration(200).delay((d, i) => i * 5).attr('cx', d => Math.max(20, Math.min(width - 20, x(d))))
+    .transition().duration(200).delay((d, i) => i * 10).attr('cy', d => 
+    {
+        // project the data using the line function
+        return makePrediction(d);
+    }
+    )
+    ;
+
+    const addedLabels = [];
+    let currentY = height - 50;
+
+    // build a list of the top 15 countries for the current score function
+    const topCountries = Object.keys(rawData).map(d => rawData[d]).sort((a, b) => scoreFunction(b) - scoreFunction(a)).slice(0, 15);
+
+    // split in two if the width of the page is less than 800px
+    if (width < 800) {
+        const firstHalf = topCountries.slice(0, 4);
+        const secondHalf = topCountries.slice(4);
+
+        // In the title margin, add the title of the graph
+        svg.append('text').text('Indicator Density Estimation').attr('x', 0).attr('y', 20).attr('font-size', "2.5vh").attr('fill', '#F9F7EC').attr('text-anchor', 'start').attr('alignment-baseline', 'middle');
+    } else {
+        addedLabels.push(topCountries);
+        // In the title margin, add the title of the graph
+        svg.append('text').text('Indicator Density Estimation').attr('x', 20).attr('y', 20).attr('font-size', 20).attr('fill', '#F9F7EC').attr('text-anchor', 'start').attr('alignment-baseline', 'middle');
+    }
+
+
+
+    // draw the point of the focused country larger and give it a glow effect
+    svg.append('g').datum([indicator.get('scoreFunction')(focusedFeature)]).selectAll('circle').data(d => d).enter().append('circle').attr('cx', d => Math.max(20, Math.min(width - 20, x(d)))).attr('cy', d => 
+    {
+        // project the data using the line function
+        console.log(d);
+        return makePrediction(d);
+    }
+    ).attr('r', 10).attr('fill', d => gradientFunction(d)).attr('stroke', '#fff').attr('stroke-width', 2).attr('style', 'box-shadow: 0px 0px 233px 56px rgba(70,46,255,0.75);')
+    //animation
+    .transition().duration(300).attr('r', 20).attr('stroke-width', 5).transition().duration(1000).attr('r', 5).attr('stroke-width', 2)
+    
+    
+    // add the label for the focused country
+    svg.append('text').text(focusedFeature.Country).attr('x', Math.max(40, Math.min(width - 150, x(indicator.get('scoreFunction')(focusedFeature)) + 10))).attr('y', makePrediction(indicator.get('scoreFunction')(focusedFeature)) - 30).attr('font-size', 12).attr('fill', '#F9F7EC').attr('text-anchor', 'start').attr('alignment-baseline', 'middle');
+
+
+
+
+    // draw the x axis
+    svg.append('g')
+        .call(
+            d3.axisBottom(x)
+            .ticks(10)
+
+        )
+        .attr('transform', `translate(0, ${height - 20})`)
+        .attr('stroke', '#fff')
+        .attr('fill', '#fff')
+
+
+    // draw the y axis
+    svg.append('g')
+        .call(d3.axisLeft(y).ticks(5))
+        .attr('transform', `translate(20, 0)`)
+        .attr('stroke', '#fff')
+        .attr('fill', '#fff')
+
+
+    
+
+
+
+
+}
+
+   
+</script>
