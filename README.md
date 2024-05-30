@@ -7,13 +7,9 @@
 | Malo Ranzetti | 296956 |
 | Anne Silvestre de Sacy| 360399|
 
-[Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
-
-# [View Project](https://leading-ai.mranzetti.com/)
+### [Visit the project homepage](https://leading-ai.mranzetti.com/)
 
 [<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/rankings.png?raw=true'>](https://leading-ai.mranzetti.com/)
-
-[<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/overview.png?raw=true'>](https://leading-ai.mranzetti.com/)
 
 ## Project overview
 
@@ -24,6 +20,13 @@ This project is based on [Kaggle data](https://www.kaggle.com/datasets/katerynam
 ### [Milestone 1 REPORT (29th March, 5pm)](milestone-1/Data_Visualization_Milestone_1.pdf)
 
 ### [Milestone 2 REPORT (26th April, 5pm)](milestone-2/Data_Visualization_Milestone_2.pdf)
+
+## Gallery
+
+
+[<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/overview.png?raw=true'>](https://leading-ai.mranzetti.com/)
+
+[<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/graph2.png?raw=true'>](https://leading-ai.mranzetti.com/)
 
 
 
