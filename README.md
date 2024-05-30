@@ -7,7 +7,7 @@
 | Malo Ranzetti | 296956 |
 | Anne Silvestre de Sacy| 360399|
 
-### [Visit the project homepage](https://leading-ai.mranzetti.com/)
+### [Visit the project homepage](https://leading-ai.mranzetti.com/) or [view the interactive map](https://leading-ai.mranzetti.com/map)
 
 [<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/rankings.png?raw=true'>](https://leading-ai.mranzetti.com/)
 
