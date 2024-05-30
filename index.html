@@ -356,7 +356,17 @@
     let controller;
     let wHeight = window.innerHeight;
     let wWidth = window.innerWidth;
-    AOS.init();
+
+    // Disable AOS on mobile devices
+    if(window.innerWidth < 768) {
+        // remove all data-aos attributes
+        let elements = document.querySelectorAll("[data-aos]");
+        elements.forEach(function(element) {
+            element.removeAttribute("data-aos");
+        });
+    } else {
+        AOS.init();
+    }
     let currentGraphScene = -1  ;
     // list of graphs to be displayed
     const graphScenes = [top15Chart, gdpBubbleChart]

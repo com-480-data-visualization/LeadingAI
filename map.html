@@ -216,11 +216,11 @@
   
 
 
-    <div id="map" class="flex w-full h-full bg-red-800 z-0" style="height: 100vh;"></div>
+    <div id="map" class="flex w-full h-full bg-red-800 z-0" style="height: 100dvh;"></div>
     
     </div>
 
-    <div id="informationBubble" class="rounded-lg absolute w-25 right-5 p-4 shadow-md z-[998] hidden pointer-events-none bg-cream-dark overflow-auto" style="top:8%; max-height: 91%;">
+    <div id="informationBubble" class="rounded-lg absolute w-25 right-5 p-4 shadow-md z-[998] hidden pointer-events-none bg-cream-dark overflow-auto" style="top:15dvh; max-height: 85dvh;">
         <h1 class="text-lg font-bold bg-cream-darkest rounded-lg p-3 mb-3 flex justify-between items-center">
             
             <span id="infoSelectedCountry">Please select a country</span>
@@ -232,10 +232,10 @@
                 pinnedCountry.set('country', null);
             }"><i class="me-2 bi bi-x-circle-fill"></i></span>
         </h1>
-        <p class="font-bold text-sm">Ranking: <span id="rankSelectedCountry">N/A</span></p>
+        <p class="font-bold text-sm mb-3">Ranking: <span id="rankSelectedCountry">N/A</span></p>
+        <div id="gaussianDisplay" class="rounded-md pointer-events-none  bottom-0 width-full z-[1000] p-4 hidden" style="height: 30vh; width: 80vw; max-width: 800px; background-color: rgba(30, 30, 30, 0.5);"></div>
         
         <i id="miscInfoCountry" class="">Click on a country to see more information</i>
-        <div id="gaussianDisplay" class="rounded-md pointer-events-none  bottom-0 width-full z-[1000] p-4 hidden" style="height: 30vh; width: 80vw; max-width: 800px; background-color: rgba(30, 30, 30, 0.5);"></div>
     </div>
 </body>
 </html>
@@ -825,7 +825,7 @@ function showGraph(focusedFeature, gradientFunction) {
 
     // create scales for the x and y axis based on the data
     const x = d3.scaleLinear().domain([0, 100]).range([20, width-20]);
-    const y = d3.scaleLinear().domain([0, dataMax]).range([height - 20, titleHeight + labelsHeight + 20]);
+    const y = d3.scaleLinear().domain([0, dataMax]).range([height - 50, titleHeight + labelsHeight]);
 
     // create a line generator that will draw the line scaled to the svg with padding
     const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveBasis);
@@ -857,10 +857,10 @@ function showGraph(focusedFeature, gradientFunction) {
 
     svg.append('g').datum(data).selectAll('circle').data(d => d).enter().append('circle').attr('r', 5).attr('fill', d => gradientFunction(d))
     // initial position is set to 0,0
-    .attr('cx', 20).attr('cy', height - 20)
+    .attr('cx', 20).attr('cy', height - 40)
     // animate the position of the data points
     .transition().duration(200).delay((d, i) => i * 5).attr('cx', d => Math.max(20, Math.min(width - 20, x(d))))
-    .transition().duration(200).delay((d, i) => i * 10).attr('cy', d => 
+    .transition().duration(200).delay((d, i) => i * 5).attr('cy', d => 
     {
         // project the data using the line function
         return makePrediction(d);
@@ -902,7 +902,8 @@ function showGraph(focusedFeature, gradientFunction) {
     
     
     // add the label for the focused country
-    svg.append('text').text(focusedFeature.Country).attr('x', Math.max(40, Math.min(width - 150, x(indicator.get('scoreFunction')(focusedFeature)) + 10))).attr('y', makePrediction(indicator.get('scoreFunction')(focusedFeature)) - 30).attr('font-size', 12).attr('fill', '#F9F7EC').attr('text-anchor', 'start').attr('alignment-baseline', 'middle');
+    svg.append('text').text(focusedFeature.Country).attr('x', Math.max(40, Math.min(width - 150, x(indicator.get('scoreFunction')(focusedFeature)) + 10))).attr('y', makePrediction(indicator.get('scoreFunction')(focusedFeature)) - 15).attr('font-size', 12).attr('fill', '#F9F7EC').attr('text-anchor', 'start').attr('alignment-baseline', 'middle')
+        .attr('font-weight', 'bold');
 
 
 
@@ -914,7 +915,7 @@ function showGraph(focusedFeature, gradientFunction) {
             .ticks(10)
 
         )
-        .attr('transform', `translate(0, ${height - 20})`)
+        .attr('transform', `translate(0, ${height - 40})`)
         .attr('stroke', '#fff')
         .attr('fill', '#fff')
 
@@ -925,6 +926,10 @@ function showGraph(focusedFeature, gradientFunction) {
         .attr('transform', `translate(20, 0)`)
         .attr('stroke', '#fff')
         .attr('fill', '#fff')
+
+    // add both axis labels
+    svg.append('text').text('Index Score').attr('x', width / 2).attr('y',height - 5).attr('font-size', 12).attr('fill', '#F9F7EC').attr('text-anchor', 'middle').attr('alignment-baseline', 'middle');
+    svg.append('text').text('Density').attr('x', x(2)).attr('y', titleHeight + labelsHeight - 20).attr('font-size', 12).attr('fill', '#F9F7EC').attr('text-anchor', 'middle').attr('alignment-baseline', 'middle').attr('transform', 'rotate(-90');
 
 
     
