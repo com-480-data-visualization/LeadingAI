@@ -21,7 +21,7 @@ This project is based on [Kaggle data](https://www.kaggle.com/datasets/katerynam
 
 ### [Milestone 2 REPORT (26th April, 5pm)](milestone-2/Data_Visualization_Milestone_2.pdf)
 
-[<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/milestone2/milestone-2/fig1.png?raw=true'>](http://185.224.139.115:8000/)
+[<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/overview.png?raw=true'>](https://leading-ai.mranzetti.com/)
 
 ## Technical overview
 
