@@ -21,6 +21,8 @@ This project is based on [Kaggle data](https://www.kaggle.com/datasets/katerynam
 
 ### [Milestone 2 REPORT (26th April, 5pm)](milestone-2/Data_Visualization_Milestone_2.pdf)
 
+### [Milestone 3 REPORT (31st May, 5pm)](milestone-3/Data_Visualization_Milestone_3.pdf)
+
 ## Gallery
 
 
