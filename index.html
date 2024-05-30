@@ -41,12 +41,12 @@
 
 <style>
     .full-screen {
-        height: 100vh;
+        height: 100dvh;
         width: 100vw;
     }
 
     .x4-screen {
-        height: 1000vh;
+        height: 1000dvh;
         width: 100vw;
     }
 
@@ -167,8 +167,8 @@
 </style>
 <body>
 
-    <div id="pinnedContent0" class="grid grid-cols-1 place-items-center absolute pt-16" style="z-index: 1000; width: 100vw">
-        <div>
+    <div id="pinnedContent0" class="grid grid-cols-1 place-items-center absolute pt-16" style="z-index: 1000; width: 100vw; height: 100dvh;">
+        <div class="place-self-center">
             <div class="flex justify-center">
                 <h1 class="text-white text-4xl md:text-8xl manrope-title p-3 text-center"> Leading AI</h1>
             </div>
@@ -178,7 +178,7 @@
 
         </div>
 
-        <div class="flex w-full justify-center mt-8 manrope-title">
+        <div class="flex w-full justify-center mt-8 manrope-title place-self-center">
 
             <div class="flexjustify-center p-4 rounded-lg" style="background-color: rgba(66, 66, 66, 0.614);">
                 <div class="flex text-center flex-col" style="opacity: 1;">
@@ -200,7 +200,7 @@
 
     <div id="scene-0" class="gradient-1 full-screen z-10"></div>
     <canvas id="particles" class="full-screen absolute top-0 z-"></canvas>
-    <div class="full-screen absolute p-6 grid grid-cols-1 z-4 gap-6 lg:p-10" style="top:100vh;">
+    <div class="full-screen absolute p-6 grid grid-cols-1 z-4 gap-6 lg:p-10" style="top:100dvh;">
 
 
     
@@ -215,7 +215,7 @@
         
     </div>
 
-    <div id="introText" class="text-white absolute w-full px-5 py-8 md:px-48 md:text-4xl ibm-plex-sans-semibold" style="top:140vh; width: 100vw;">
+    <div id="introText" class="text-white absolute w-full px-5 py-8 md:px-48 md:text-4xl ibm-plex-sans-semibold" style="top:105dvh; width: 100vw;">
 
         <div id="firstIntroText" class="text-center text-2xl">This project is based on <span class="cursor-pointer underline" onclick="window.open('https://www.kaggle.com/datasets/katerynameleshenko/ai-index')">Kaggle data</span> by Kateryna Meleshenko, originally provided by
             <span class="cursor-pointer underline" onclick="window.open('https://www.tortoisemedia.com/intelligence/global-ai/')">Tortoise Media</span> </div>
@@ -248,7 +248,7 @@
         
     </div>
 
-    <div id="headlines" class="absolute grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full gap-6 py-10 px-4 z-4" style="top: 200vh;">
+    <div id="headlines" class="absolute grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full gap-6 py-10 px-4 z-4" style="top: 200dvh;">
 
         
 
@@ -296,7 +296,7 @@
     <div id="scene-2" class="grid grid-cols-1 justify-items-center">
         
 
-        <div id="graphics" style="width: 100vw; height: 100vh;">
+        <div id="graphics" style="width: 100vw; height: 100dvh;">
             <div class="w-full h-full grid grid-cols-1 place-content-center" style="background-color: #eeead5; width: 100vw;">
                 <h1 class="text-center h-full border-10 m-4 rounded" style="
                     font-family: 'Manrope', sans-serif;
@@ -346,7 +346,7 @@
     </div>
 
     <div class="full-screen" id="map">
-        <iframe src="/map" class="w-4/5 h-4/5" style="border: 0; width: 100vw; height: 100vh;"></iframe>
+        <iframe src="/map" class="w-4/5 h-4/5" style="border: 0; width: 100vw; height: 100dvh;"></iframe>
     </div>
         
 
@@ -387,15 +387,7 @@
         let introTextOffset = $("#introText").offset().top;
         let durationTitle = introTextOffset - pinnedContent0Offset;
 
-        // Create first scene
-        new ScrollMagic.Scene({
-            triggerElement: "#pinnedContent0",
-            duration:  durationTitle,
-            triggerHook: 0.3,
-            reverse: true
-        })
-        .setPin("#pinnedContent0")
-        .addTo(controller);
+        
 
         // Pin each headline
         new ScrollMagic.Scene({
@@ -428,7 +420,7 @@
         $("#headlines").css("top", headlinesTop);
 
         // set scene1 to be the same height  as introText + headlines
-        let scene1Duration = introTextHeight + headlinesHeight - 0.5 * wHeight;
+        let scene1Duration = introTextHeight + headlinesHeight - 0.9 * wHeight;
         $("#scene-1").css("height", scene1Duration);
 
         
