@@ -554,6 +554,40 @@ video {
   --tw-contain-style:  ;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
@@ -740,6 +774,14 @@ video {
 
 .gap-6 {
   gap: 1.5rem;
+}
+
+.gap-12 {
+  gap: 3rem;
+}
+
+.gap-\[15\] {
+  gap: 15;
 }
 
 .place-self-center {
@@ -1006,6 +1048,11 @@ video {
   .md\:px-48 {
     padding-left: 12rem;
     padding-right: 12rem;
+  }
+
+  .md\:px-64 {
+    padding-left: 16rem;
+    padding-right: 16rem;
   }
 
   .md\:text-2xl {
