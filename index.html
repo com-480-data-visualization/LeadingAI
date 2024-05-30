@@ -446,7 +446,7 @@
         // add scene 2
         new ScrollMagic.Scene({
             triggerElement: "#graphics",
-            duration:  wHeight * 0.5,
+            duration:  wHeight * 0.7,
             triggerHook: 0,
             reverse: true
         })
@@ -454,7 +454,7 @@
 
             // split the progress into 2 sections
             let progress = e.progress;
-            let section = Math.min(Math.floor(progress * 2),1);
+            let section = Math.floor(progress * 2);
             if (section != currentGraphScene) {
                 currentGraphScene = section;
                 let sceneFunc = graphScenes[currentGraphScene];
@@ -692,25 +692,13 @@
             .attr("x", graphWidth / 2)
             .attr("y", titleMargin / 2)
             .attr("dy", "0.35em")
-            .text("")
+            .text(title)
             .attr("fill", "black")
             .attr("font-size", "4vw")
             .attr("font-family", "Rubik Mono One")
             .attr("font-weight", "400")
             .attr("text-anchor", "middle")
-            // add a tween so that the title appears letter by letter
-            .transition()
-            .duration(2000)
-            .tween("text", function() {
-                let i = 0;
-                let titleLength = title.length;
-                return function(t) {
-                    let newText = title.substring(0, Math.floor(i * titleLength));
-                    d3.select(this).text(newText);
-                    i += 0.01;
-                };
-            });
-
+            
     }
 
     function gdpBubbleChart() {
@@ -1108,17 +1096,6 @@
             .attr("font-family", "Rubik Mono One")
             .attr("font-weight", "400")
             .attr("text-anchor", "middle")
-            .transition()
-            .duration(2000)
-            .tween("text", function() {
-                let i = 0;
-                let titleLength = "A.I. Index vs GDP per Capita".length;
-                return function(t) {
-                    let newText = "A.I. Index vs GDP per Capita".substring(0, Math.floor(i * titleLength));
-                    d3.select(this).text(newText);
-                    i += 0.01;
-                };
-            });
         
         
 
