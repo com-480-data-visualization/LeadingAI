@@ -51,7 +51,43 @@ In the previous milestone, we established the main idea of our project, which is
 
 
 \section{Design Process}
-% Path to the final result
+// part 1: the splash page
+
+During the design process, I started with the main interactive map. Then, I realized that it would be too brutal for users to just arrive on the map. Also, a map is quite clunky and takes up the whole screen. I needed to create a splash page.
+
+I first worked on making the front page eyecatching on user arrival, with a clear title. Using the scrollmagic library, I managed to make it intriguing for the user to scroll. Then, I added color coding for each indicator (feature) in the dataset. Seeing many news articles about the AI sector made me realize I should build the storytelling of the project around recent news. To do this, I selected a few interesting and relevant headlines. I linked them in the frontpage, using a responsive tailwind grid, to build a spatially interesting layout.
+
+// show layout here
+
+After grabbing the user's attention, I wanted the first graph to be powerful and eye catching. This is why I only show the top 15 countries, short ISO 3 codes of the country, and large numbers.
+I wanted to bring attention to the clear divide between the US, China and the rest of the world.
+
+After this, I wanted to give a more global overview of the dataset. This is done with a bubble chart. To do this, I had to choose a proper Y axis, but the dataset had no logical choice. Hence, I used another kaggle dataset for GDP and GDP per capita to cross reference the GDP data for each country. This provide a pretty interesting graph, as we can low GDP per capita correlates with low index score, but however a high GDP per capita does not always imply a high index score. Hence, the AI divide is increasing even within countries associated with a higher income and development. I added the possibility to set the bubble size by the GDP of the country. This could be interesting, as it shows that the a higher GDP quite strongly correlates with a higher AI index. This element is interesting, because the combination of high AI index plus high GDP means that a country may have more influence on global politics and on the AI sector itself.
+
+To showcase the interactivity of the graph, and because political aspects are not viewable directly in the interactive map, I decided to add another toggleable "slide" to the graph, where we can view the types of political regimes of each country in the dataset and set the bubble size to the government strategy feature score.
+
+I have a before and after image of the interactive map.
+
+I also want to add three graphs showing the three built graphs.
+
+After all this, I built a call to action to view the interactive map, which can deliver much more precise results on a specific country, for one-to-one comparison
+
+// Part 2
+
+The interactive map had to be reworked since the previous milestone. 
+
+The first change was to add a menu to set the current targeted indicator out of the 7 + 1 total score in the dataset. I reused the same coloscheme for the indicators for coherence. I built a stateful system to automatically recolor the map with predifined color scale for each indicator.
+
+Next, I had to define leaflet.js mouse behaviors. I implemented it in such a way that on mouse hover, we only show some the indicator results. On click, the tooltip becomes pinned and larger, and I generate a density estimation graph for the current selected indicator.
+
+This graph uses KDE (explain KDE) to estimate and represent how countries generally score. We plot points for all the countries on this graph, with the same color scale. However, names were not added since the clutter was impossible to read.
+In the tooltip, we give the country's rankings for each indicator. the ranking is highlighted in green if it is in the top 15 for that given indicator and in red if in the lowest 15. USers can also change indicator by clicking the corresponding indicator directly in the tooltip. Users can close with a button the tooltip that is pinned.
+
+// Part 3
+
+Backend work
+
+Both pages are given as monolithic html pages (index.html for the splash, map.html for the int. map). However, the data is loaded from a static backend (built with fastapi). All the data was processed from csv to json for easier loading in javascript, and is served by the fastapi server. This server was also deployed on a VPS for easier demo.
 
 \section{Challenges}
 

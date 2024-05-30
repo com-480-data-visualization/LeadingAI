@@ -11,6 +11,10 @@
 
 # [View Project](https://leading-ai.mranzetti.com/)
 
+[<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/rankings.png?raw=true'>](https://leading-ai.mranzetti.com/)
+
+[<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/overview.png?raw=true'>](https://leading-ai.mranzetti.com/)
+
 ## Project overview
 
 In past years, we have witnessed an unprecedented boom in the A.I sector. Some may think it is a buzzword, others see it as the way forward for society. Regardless, the impact of A.I on our society is undeniable. This project aims to visualize the leading nations in the A.I sector compare to each other. Although strong leaders emerge, we can turn our eyes to the future and imagine who the next important players will be.
@@ -21,7 +25,7 @@ This project is based on [Kaggle data](https://www.kaggle.com/datasets/katerynam
 
 ### [Milestone 2 REPORT (26th April, 5pm)](milestone-2/Data_Visualization_Milestone_2.pdf)
 
-[<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/overview.png?raw=true'>](https://leading-ai.mranzetti.com/)
+
 
 ## Technical overview
 
