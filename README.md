@@ -9,6 +9,9 @@
 
 ### [Visit the project homepage](https://leading-ai.mranzetti.com/) or [view the interactive map](https://leading-ai.mranzetti.com/map)
 
+#### Video demonstration
+[![Watch the video](https://drive.google.com/file/d/17VBDksRJooznRQkhCXDOmMXlC8ap4T1a/view?usp=sharing)](https://drive.google.com/file/d/17VBDksRJooznRQkhCXDOmMXlC8ap4T1a/view?usp=sharing)
+
 [<img src='https://github.com/com-480-data-visualization/com-480-project-leadingAI/blob/master/milestone-3/rankings.png?raw=true'>](https://leading-ai.mranzetti.com/)
 
 ## Project overview
